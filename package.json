@@ -1,25 +1,28 @@
 {
-  "name": "box_invasion",
+  "name": "loginapp",
   "version": "1.0.0",
-  "description": "BOX INVASION. Developed at FH Kiel. Winter Semester 2017.",
-  "main": "server.js",
+  "description": "Simple authentication system",
+  "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/monk047/boxinvasion.git"
-  },
-  "keywords": [
-    "game"
-  ],
-  "author": "Abul B S Tarannum, Marvi Islam, Ibtehaj-ul Hasan,",
+  "author": "Brad Traversy",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/monk047/boxinvasion/issues"
-  },
-  "homepage": "https://github.com/monk047/boxinvasion#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "connect-flash": "*",
+    "cookie-parser": "^1.4.1",
+    "express": "*",
+    "express-handlebars": "*",
+    "express-messages": "*",
+    "express-session": "*",
+    "express-validator": "*",
+    "mongodb": "*",
+    "mongoose": "*",
+    "passport": "*",
+    "passport-http": "*",
+    "passport-local": "*"
   }
 }
