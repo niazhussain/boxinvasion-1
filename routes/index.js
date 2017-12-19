@@ -1,10 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
+
+//var CreateUI = require('../models/UI');
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res){
-	res.render('index');
+	//var name =   ;
+   res.render('index', {title: '' ,condition:false });
+	//CreateUI.CreateMatrics();
 });
+
+
 
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
@@ -14,5 +20,6 @@ function ensureAuthenticated(req, res, next){
 		res.redirect('/users/login');
 	}
 }
+
 
 module.exports = router;
