@@ -77,8 +77,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-
-
 app.use('/', routes);
 app.use('/users', users);
 
@@ -90,14 +88,18 @@ var server=app.listen(app.get('port'), function(){
 var io = socket(server);
 //on connection
 io.on('connection', (socket)=>{
-    console.log('Socket connection ID :', socket.id);
+
 // when user is typing ,show typing message to all connected user
 socket.on('typing', function (data){
     socket.broadcast.emit('typing', data);
 });
+socket.on('not typing', function (){
+    socket.broadcast.emit('not typing');
+});
 // chat data
 socket.on('chat', function (data) {
-    // console.log(data);
+    console.log("client id: "+ socket.id);
+
     io.sockets.emit('chat', data);
 });
 });

@@ -6,7 +6,8 @@ var router = express.Router();
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res){
 	//var name =   ;
-   res.render('index', {title: '' ,condition:false });
+
+     res.render('index', {title: req.user.name,userName: req.user.name ,condition:false });
 	//CreateUI.CreateMatrics();
 });
 
