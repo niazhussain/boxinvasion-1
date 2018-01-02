@@ -89,6 +89,12 @@ router.post('/login',
   passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login',failureFlash: true}),
   function(req, res) {
      res.redirect('/',req);
+
+     //
+     //make a socket connection
+     //add user to active collection
+     
+
   });
 
 router.get('/logout', function(req, res){

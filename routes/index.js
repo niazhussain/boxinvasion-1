@@ -2,13 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 
-//var CreateUI = require('../models/UI');
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res){
-	//var name =   ;
-
-     res.render('index', {title: req.user.name,userName: req.user.name ,condition:false });
-	//CreateUI.CreateMatrics();
+	res.render('index', {title: req.user.name,userName: req.user.name ,condition:false });
 });
 
 
