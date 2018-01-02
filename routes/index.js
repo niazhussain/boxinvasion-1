@@ -5,6 +5,10 @@ var router = express.Router();
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res){
 	res.render('index', {title: req.user.name,userName: req.user.name ,condition:false });
+	
+	var sess = req.session;
+	console.log(sess.passport.user);
+
 });
 
 

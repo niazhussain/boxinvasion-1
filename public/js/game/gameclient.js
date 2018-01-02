@@ -1,5 +1,3 @@
-
-
 var canvas = document.querySelector('canvas');
 //Canvas Dimension
 var cnvW = 500+20;
