@@ -83,8 +83,8 @@ function IsHorizontal(x ,y)
     if( (XVal > 20 && XVal < 100)  && (YVal > 0  && YVal < 20) )
     {
         // CHECK FOR ALREADY DRAWN LINE
-        if(HorizontalArrayLineStatus[HorizontalLineNumber][VerticalLineNumber] == "Filled") {
-            alert("line is already drawn");
+        var result = validateMove(HorizontalLineNumber , VerticalLineNumber ,true ,false);
+        if(!result){
             return;
         }
 
@@ -121,8 +121,8 @@ function IsVertical(x ,y)
     if( (XVal > 0 && XVal < 20)  && (YVal > 20  && YVal < 100) )
     {
         // CHECK FOR ALREADY DRAWN LINE
-        if(VerticalArrayLineStatus[VerticalLineNumber][HorizontalLineNumber] == "Filled") {
-            alert("line is already drawn");
+        var result = validateMove(HorizontalLineNumber , VerticalLineNumber , false ,true);
+        if(!result){
             return;
         }
 
@@ -278,19 +278,19 @@ function updateUI()
     }
 
 }
-function validateMove(HLineNo , VLineNo , isHorizontal , isVertical)
+function validateMove(HLineNo , VLineNo , isHorizontalLine , isVerticalLine)
 {
-    if(isHorizontal)
+    if(isHorizontalLine)
     {
         if(HorizontalArrayLineStatus[HLineNo][VLineNo] == "Filled") {
-            alert("line is already drawn");
+            alert("H : line is already drawn");
             return false;
         }
     }
-    else(isVertical)
+    else if(isVerticalLine)
     {
         if(VerticalArrayLineStatus[VLineNo][HLineNo] == "Filled") {
-            alert("line is already drawn");
+            alert("V :line is already drawn");
             return false;
         }
     }
