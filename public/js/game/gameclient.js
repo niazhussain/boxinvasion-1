@@ -1,5 +1,3 @@
-
-
 var canvas = document.querySelector('canvas');
 //Canvas Dimension
 var cnvW = 500+20;
@@ -85,8 +83,8 @@ function IsHorizontal(x ,y)
     if( (XVal > 20 && XVal < 100)  && (YVal > 0  && YVal < 20) )
     {
         // CHECK FOR ALREADY DRAWN LINE
-        var result = validateMove(HorizontalLineNumber , VerticalLineNumber ,true);
-        if(!result){
+        if(HorizontalArrayLineStatus[HorizontalLineNumber][VerticalLineNumber] == "Filled") {
+            alert("line is already drawn");
             return;
         }
 
@@ -123,8 +121,8 @@ function IsVertical(x ,y)
     if( (XVal > 0 && XVal < 20)  && (YVal > 20  && YVal < 100) )
     {
         // CHECK FOR ALREADY DRAWN LINE
-        var result = validateMove(HorizontalLineNumber , VerticalLineNumber , false);
-        if(!result){
+        if(VerticalArrayLineStatus[VerticalLineNumber][HorizontalLineNumber] == "Filled") {
+            alert("line is already drawn");
             return;
         }
 
@@ -280,7 +278,7 @@ function updateUI()
     }
 
 }
-function validateMove(HLineNo , VLineNo , isHorizontal)
+function validateMove(HLineNo , VLineNo , isHorizontal , isVertical)
 {
     if(isHorizontal)
     {
@@ -289,7 +287,8 @@ function validateMove(HLineNo , VLineNo , isHorizontal)
             return false;
         }
     }
-    else {
+    else(isVertical)
+    {
         if(VerticalArrayLineStatus[VLineNo][HLineNo] == "Filled") {
             alert("line is already drawn");
             return false;
