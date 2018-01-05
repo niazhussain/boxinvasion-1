@@ -9,6 +9,9 @@ var session = require('express-session');
 var sharedsession = require('express-socket.io-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var jwtStrategy = require('passport-jwt').Strategy;
+var extractJwt =  require('passport-jwt').ExtractJwt;
+var jwt = require('jsonwebtoken');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var socket = require('socket.io');
@@ -97,6 +100,7 @@ var server = app.listen(app.get('port'), function(){
 //     autoSave:true
 // }));
 
+
 // io.on('connection', (socket)=> {
 //     // Accept a login event with user's data
 //     console.log('Connection made \n' + socket.id);
@@ -127,14 +131,24 @@ var io = socket(server);
 // }));
 
 io.use((socket, next) => {
-  console.log('\nMade a new connection : '+socket.id);
-  let handshake = socket.handshake;
-  console.log(handshake);
+  console.log('\nMade a new connection \n '+socket.id);
+  console.log('with Token : '+CircularJSON.stringify(socket.handshake.query.token));
+  console.log('from user : '+jwt.decode(socket.handshake.query.token));
+  console.log('_________________________________');
+  // console.log(client.req);
+  // let handshake = socket.handshake;
+  // console.log(handshake);
+  // console.log(socket.request);
   next();
 });
 
+
+
 io.on('connection', (socket)=>{
- 
+
+          // io.engine.generateId = (req) => {
+          //   return req.user.id // custom id must be unique
+          // } 
       
 // // when user is typing ,show typing message to all connected user
 //       socket.on('typing', function (data){
@@ -163,3 +177,4 @@ io.on('connection', (socket)=>{
 });
 
 //********************************************************//
+

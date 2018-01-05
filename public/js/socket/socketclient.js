@@ -1,2 +1,4 @@
+let token = document.getElementById('token').innerHTML;
+
 //Establish Connection
-const socket = io();
+let socket = io(`http://localhost:3000?token=${token}`);
