@@ -98,9 +98,6 @@ canvas {
   margin-left: 20px;
   margin-right: auto;
 }
-
-
-
 .chat-window{
   bottom:0;
   float:left;
@@ -153,43 +150,47 @@ canvas {
 
 
 }
-
 #typingMessage p{
   padding: 14px 0px;
   margin: 0 20px;
   color:green;
   font-family: "Times New Roman"
 }
-
 #messageArea strong{
 
 }
-
 label{
   box-sizing: border-box;
   display: block;
   padding: 10px 20px;
 }
-
-/*input{
-  padding: 20px 20px;
-  box-sizing: border-box;
-  background: #c4e3f3;
-  border: 0;
-  display: block;
-  width: 100%;
-  background: #fff;
-  border-bottom: 1px solid #eee;
-  font-family: Nunito;
-  font-size: 16px;
+.chat-img{
+  display: inline-block;
+  width: 20%;
+}
+.chat-body{
+  display: inline-block;
+  width: 78%;
+}
+/* down to : css related to emoji in chat*/
+#emojiWrapper {
+  display: none;
+  width: inherit;
+  bottom: 105px;
+  position: absolute;
+  background-color: #c4e3f3;
+  box-shadow: 0 0 10px #555;
+}
+#emojiWrapper img {
+  margin: 2px;
+  padding: 2px;
+  width: 25px;
+  height: 25px;
+}
+#emojiWrapper img:hover {
+  background-color: green;
+}
+.emoji{
+  display: inline;
 }
 
-button{
-  background: #2b542c;
-  color: #2e6da4;
-  font-size: 18px;
-  border: 0;
-  padding: 12px 0;
-  width: 100%;
-  border-radius: 0 0 2px 2px;
-}*/
