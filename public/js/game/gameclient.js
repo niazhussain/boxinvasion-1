@@ -31,22 +31,127 @@ for (var i = dotX; i < numberOfDots; i++) {
 }
 
 
+$( document ).ready(function() {
 
-var canvas = document.getElementById("canvas");
+    $("#Leave_Game").hide();
 
-canvas.addEventListener('click', getPosition , false);
+    $( "#Play" ).click(function() {
+        var canvas = document.getElementById("canvas");
+        canvas.addEventListener('click', getPosition , false);
+
+        document.getElementById("game_msg").innerHTML = "<h3><span> Make a first move </span></h3>";
+
+        $("#Play").hide();
+        $("#Leave_Game").show();
+
+        var PlayerTurnStatus = document.getElementById("PlayerTurn");
+        PlayerTurnStatus.innerHTML = "<h3>" +"<span class ='label label-success'>" +
+            TurnStatus +
+            "</span>" + "</h3>";
+
+    });
+});
+
+
+
+
+
+
+var player2Name = "n/a" ;
+var TurnStatus = "P1";
+
+
 
 function getPosition(event)
 {
+
+    document.getElementById("game_msg").innerHTML = "";
     x = event.offsetX || event.layerX ;
     y = event.offsetY || event.layerY ;
 
     IsHorizontal(x,y);
     IsVertical(x,y);
 
-    // alert("x: " + x + "  y: " + y);
+
+
+    player2Name = "Com";
+    //alert(TurnStatus + " turn");
+    if(TurnStatus != "P1")
+    {
+            setTimeout(ComputerTurn, 800);
+    }
+
+    //update turn message after Player's turn.
+    UpdateTurnStatus();
+    var Player1stats = document.getElementById( "player1_stats");
+    Player1stats.innerHTML = "<span class ='text-center label label-success'>" +
+                                Player1Score +
+                                "</span>" ;
+
+    var Player2stats = document.getElementById( "player2_stats");
+    Player2stats.innerHTML = "<span class =' text-center label label-success'>" +
+                                Player2Score +
+                                "</span>" ;
+
+
+}
+function ComputerTurn(){
+
+    var bComTurn = true;
+    var ComputerHorizontalLineNumber;
+    var ComputerVerticalLineNumber;
+    while(bComTurn)
+    {
+        var res =false;
+        var randonNumberX = Math.floor((Math.random() * 500) + 0);
+        var randonNumberY = Math.floor((Math.random() * 500) + 0);
+        ComputerHorizontalLineNumber = Math.floor(randonNumberX / 100);
+        ComputerVerticalLineNumber = Math.floor(randonNumberY / 100);
+        var XVal = randonNumberX % 100;
+        var YVal = randonNumberY % 100;
+        if( (XVal > 20 && XVal < 100)  && (YVal > 0  && YVal < 20) ){
+            if(IsHorizontal(randonNumberX ,randonNumberY))
+                {
+                    bComTurn = false;
+                }
+        }
+        else if( (XVal > 0 && XVal < 20)  && (YVal > 20  && YVal < 100) )
+        {
+            if(IsVertical(randonNumberX, randonNumberY))
+                {
+                    bComTurn = false;
+                }
+        }
+    }
+    // IF COMPUTER GETS EXTRA TURN.
+    if(TurnStatus == "COM")
+        setTimeout(ComputerTurn, 800);
+    else
+        TurnStatus = "P1";
+
+    //update turn message after Computer's turn.
+    UpdateTurnStatus();
+
+    var Player1stats = document.getElementById( "player1_stats");
+    Player1stats.innerHTML = "<span class =' text-center label label-success'>" +
+        Player1Score +
+        "</span>";
+
+    var Player2stats = document.getElementById( "player2_stats");
+    Player2stats.innerHTML = "<span class =' text-center label label-success'>" +
+        Player2Score +
+        "</span>" ;
+
 }
 
+
+function UpdateTurnStatus()
+{
+    var PlayerTurnStatus = document.getElementById("PlayerTurn");
+    PlayerTurnStatus.innerHTML = "<h3>" +"<span class ='label label-success'>" +
+        TurnStatus +
+        "</span>" + "</h3>";
+}
 
 /////////////////////////////// Variables ///////////////////////////////
 c.font = "bold 18px Slab serif";
@@ -68,6 +173,12 @@ var count = 0;
 
 var HorizontalArrayLineStatus = [ [],[],[],[],[] ]; // Horizontal array
 var VerticalArrayLineStatus = [ [],[],[],[],[] ]; // Vertical array
+var BoxCapturedArray = [[], [], [], [], [] ];
+
+var Player1Score =0;
+var Player2Score =0;
+
+
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -78,22 +189,43 @@ function IsHorizontal(x ,y)
     IsBoxCompleted =false;
     HorizontalLineNumber = Math.floor(x / 100);
     VerticalLineNumber = Math.floor(y / 100);
+
+   // alert(HorizontalLineNumber + " , " + VerticalLineNumber)
     var XVal = x % 100;
     var YVal = y % 100;
     if( (XVal > 20 && XVal < 100)  && (YVal > 0  && YVal < 20) )
     {
+
         // CHECK FOR ALREADY DRAWN LINE
         var result = validateMove(HorizontalLineNumber , VerticalLineNumber ,true ,false);
         if(!result){
-            return;
+            return false;
         }
 
-        CheckBoxCompleted(HorizontalLineNumber , VerticalLineNumber , true  ,false);
+        if(CheckBoxCompleted(HorizontalLineNumber , VerticalLineNumber , true  ,false))
+        {
+            if(count%2 == 0)
+            {
+                TurnStatus = "P1";
+            }
+            else {
+                TurnStatus = "COM";
+            }
+
+        }
 
         if(!IsBoxCompleted )
         {
-            // alert("count incremented");
+             //alert("count incremented");
             count++;
+
+            if(count%2 == 0)
+            {
+                TurnStatus = "P1";
+            }
+            else {
+                TurnStatus = "COM";
+            }
         }
 
         var hLineX = 20;
@@ -106,7 +238,7 @@ function IsHorizontal(x ,y)
         c.fillStyle = '#1d5a67';//'rgba(250, 144, 33,0.7)';
         c.fillRect((HorizontalLineNumber*cellWidth)+hLineX,(VerticalLineNumber*cellWidth)+hLineY, hLineW, hLineH);
     }
-    return ;
+    return true;
 }
 
 function IsVertical(x ,y)
@@ -120,18 +252,37 @@ function IsVertical(x ,y)
     var YVal = y % 100;
     if( (XVal > 0 && XVal < 20)  && (YVal > 20  && YVal < 100) )
     {
+
         // CHECK FOR ALREADY DRAWN LINE
         var result = validateMove(HorizontalLineNumber , VerticalLineNumber , false ,true);
         if(!result){
-            return;
+            return false;
         }
 
-        CheckBoxCompleted(HorizontalLineNumber , VerticalLineNumber , false ,true);
+        if(CheckBoxCompleted(HorizontalLineNumber , VerticalLineNumber , false ,true))
+        {
+            if(count%2 == 0)
+            {
+                TurnStatus = "P1";
+            }
+            else {
+                TurnStatus = "COM";
+            }
+        }
+
 
         if(!IsBoxCompleted )
         {
             //alert("count incremented");
             count++;
+
+            if(count%2 == 0)
+            {
+                TurnStatus = "P1";
+            }
+            else {
+                TurnStatus = "COM";
+            }
         }
 
         var vLineX = 0;
@@ -144,7 +295,7 @@ function IsVertical(x ,y)
         c.fillStyle = '#1d5a67';//'rgba(250, 144, 33,0.7)';
         c.fillRect((HorizontalLineNumber*cellWidth)+vLineX,(VerticalLineNumber*cellWidth)+vLineY, vLineW, vLineH);
     }
-    return ;
+    return true;
 }
 
 function PopulateArray(FirstIndex , SecondIndex , isHorizontal)
@@ -160,6 +311,36 @@ function PopulateArray(FirstIndex , SecondIndex , isHorizontal)
     }
 
     //alert(count);
+}
+
+function PopulateBoxCapturedArray(FirstIndex , SecondIndex )
+{
+    //alert(FirstIndex +" , " + SecondIndex);
+    BoxCapturedArray[FirstIndex][SecondIndex] = TurnStatus;
+
+}
+
+function CalculateScore()
+{
+    var score1 =0;
+    var score2 =0;
+    for(var i=0; i<BoxCapturedArray.length; i++)
+    {
+        for(var j=0; j<BoxCapturedArray.length; j++)
+        {
+            if(BoxCapturedArray[i][j] == "P1")
+            {
+                score1++;
+            }
+            else if(BoxCapturedArray[i][j] == "COM")
+            {
+                score2++;
+            }
+        }
+    }
+    Player1Score = score1;
+    Player2Score = score2;
+   // alert(Player1Score);
 }
 // HTMLCanvasElement.prototype.getPosition = getPosition;
 
@@ -181,12 +362,16 @@ function CheckBoxCompleted(HLineNo , VLineNo , isHorizontal , isVertical){
             else
             {
                 c.fillStyle = 'rgba(0, 0, 0, 1.0)';//'#131a67';
-                c.fillText('P2', PlayerNoRectX + (HLineNo * 100) ,PlayerNoRectY + ((VLineNo) *100));
+                c.fillText(player2Name, (PlayerNoRectX - 8) + (HLineNo * 100) ,PlayerNoRectY + ((VLineNo) *100));
                 c.fillStyle = 'rgba(0, 0, 255, .4)';//'#131a67';
             }
 
             c.fillRect(RectX + ( HLineNo * 100),RectY + (VLineNo *100)  , RectWidth, RectHeight);
 
+            //update the box captures status.
+
+            PopulateBoxCapturedArray(HLineNo , VLineNo);
+            CalculateScore();
 
         }
         if(HorizontalArrayLineStatus[HLineNo][VLineNo - 1] == "Filled" &&
@@ -207,12 +392,14 @@ function CheckBoxCompleted(HLineNo , VLineNo , isHorizontal , isVertical){
             {
                 c.fillStyle = 'rgba(0, 0, 0, 1.0)';//'#131a67';
 
-                c.fillText('P2', PlayerNoRectX + (HLineNo * 100) ,PlayerNoRectY + ((VLineNo -1) *100));
+                c.fillText(player2Name, (PlayerNoRectX - 8) + (HLineNo * 100) ,PlayerNoRectY + ((VLineNo -1) *100));
                 c.fillStyle = 'rgba(0, 0, 255, .4)';//'#131a67';
             }
 
             c.fillRect(RectX + (HLineNo * 100),RectY + ((VLineNo -1) *100) , RectWidth, RectHeight);
             //alert("Box Completed case 2");
+            PopulateBoxCapturedArray(HLineNo , VLineNo-1);
+            CalculateScore();
         }
     }
     else if(isVertical) {
@@ -233,13 +420,15 @@ function CheckBoxCompleted(HLineNo , VLineNo , isHorizontal , isVertical){
             {
                 c.fillStyle = 'rgba(0, 0, 0, 1.0)';//'#131a67';
 
-                c.fillText('P2', PlayerNoRectX + (HLineNo * 100) ,PlayerNoRectY + ((VLineNo) *100));
+                c.fillText(player2Name, (PlayerNoRectX - 8) + (HLineNo * 100) ,PlayerNoRectY + ((VLineNo) *100));
                 c.fillStyle = 'rgba(0, 0, 255, .4)';//'#131a67';
             }
             // c.fillStyle = 'rgba(255, 0, 0, .4)';//'#131a67';
             c.fillRect(RectX + ( HLineNo * 100),RectY + (VLineNo *100)  , RectWidth, RectHeight);
 
             //alert("Box Completed case 1");
+            PopulateBoxCapturedArray( HLineNo,VLineNo);
+            CalculateScore();
         }
         if(VerticalArrayLineStatus[VLineNo][HLineNo - 1] == "Filled" &&
             HorizontalArrayLineStatus[HLineNo - 1 ][VLineNo ] == "Filled" &&
@@ -257,14 +446,18 @@ function CheckBoxCompleted(HLineNo , VLineNo , isHorizontal , isVertical){
             {
                 c.fillStyle = 'rgba(0, 0, 0, 1.0)';//'#131a67';
 
-                c.fillText('P2',PlayerNoRectX + ( (HorizontalLineNumber - 1) * 100) ,PlayerNoRectY + (VLineNo*100));
+                c.fillText(player2Name,(PlayerNoRectX - 8) + ( (HorizontalLineNumber - 1) * 100) ,PlayerNoRectY + (VLineNo*100));
                 c.fillStyle = 'rgba(0, 0, 255, .4)';//'#131a67';
             }
             //c.fillStyle = 'rgba(255, 0, 0, .4)';//'#131a67';
             c.fillRect(RectX + ( (HorizontalLineNumber - 1) * 100),RectY + ((VLineNo) *100) , RectWidth, RectHeight);
             //alert("Box Completed case 2");
+            PopulateBoxCapturedArray(HLineNo-1 , VLineNo );
+            CalculateScore();
+
         }
     }
+    return IsBoxCompleted;
 
 }
 
@@ -283,21 +476,56 @@ function validateMove(HLineNo , VLineNo , isHorizontalLine , isVerticalLine)
     if(isHorizontalLine)
     {
         if(HorizontalArrayLineStatus[HLineNo][VLineNo] == "Filled") {
-            alert("H : line is already drawn");
+           // alert("H : line is already drawn");
             return false;
         }
     }
     else if(isVerticalLine)
     {
         if(VerticalArrayLineStatus[VLineNo][HLineNo] == "Filled") {
-            alert("V :line is already drawn");
+            //alert("V :line is already drawn");
             return false;
         }
     }
 
     return true;
 }
+
+function CheckWinningCondition()
+{
+
+}
 function sendMove() // update the game object and send it to gameEngine
 {
 
 }
+
+
+
+// this is for show modal on the page load
+
+    $(window).on('load',function(){
+        $('#myModal').modal('show');
+    });
+
+
+var modalConfirm = function(callback){
+
+    $("#modal-btn-yes").on("click", function(){
+        callback(true);
+        $("#myModal").modal('hide');
+    });
+
+    $("#modal-btn-no").on("click", function(){
+        callback(false);
+        $("#myModal").modal('hide');
+    });
+};
+
+modalConfirm(function(confirm){
+    if(confirm){
+        $("#result").html("You are playing with Computer");
+    }else{
+        $("#result").html("Challenge to start the game");
+    }
+});

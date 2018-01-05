@@ -1,8 +1,40 @@
-<h3 class="page-header text-center">Connect the dots and capture a Box!</h3>
+<h3 class="page-header text-center" xmlns="http://www.w3.org/1999/html">Connect the dots and capture a Box!</h3>
 <p class="text-center">Welcome {{title}}</p>
+<b><div class="alert text-center " role="alert" id="result"></div></b>
+
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Welcome</h4>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to start a game with computer?</p>
+            </div>
+
+            <div class="modal-footer">
+                <form method="post" action="/">
+                    <button type="button" class="btn btn-default" id="modal-btn-yes">Yes</button>
+                    <button type="button" class="btn btn-primary" id="modal-btn-no">No</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--///////////////////////////-->
+
 
 
 <div class="container container-margin" style="max-width: 1400px;">
+
     <div class="row chat-window col-xs-4 col-md-4" id="chat_window" style="margin-left:-50px;">
         <!--<div class="col-xs-12 col-md-12">-->
         <div class="panel">
@@ -12,7 +44,7 @@
                     <div id="messageArea">
                         <div id="typingMessage" > </div>
                     </div>
-                    <input id="user" type="hidden" value="{{userName}}" />
+                    <input id="user" type="hidden" value="{{userName}}" data-target="#myModal" />
                     <div class="input-group" style="margin-bottom:0px">
                         <span class="input-group-addon" id="basic-addon1">{{userName}}</span>
                         <input id="message" type="text" class="form-control input-sm" placeholder="Type your message here..." />
@@ -38,14 +70,30 @@
     <script src="/js/chat/chatclient.js"><{{!}}/script>
     <script src="/js/game/gameclient.js"><{{!}}/script>
     <div class="row right-panel col-xs-4 col-md-4" id="right_panel_1" style="margin-right:-70px;">
-        <div class="panel sub-right-panel col-xs-4 col-md-4" id="game_options" >
-
+        <div class="text-center panel sub-right-panel col-xs-4 col-md-4" id="game_options">
+            <form action="#" method="post">
+                <h3><button type="submit" class="btn btn-primary btn-md" id="Leave_Game">Leave Game</button></h3>
+            </form>
+            <h3><button type="submit" class="btn btn-primary btn-md" id="Play">Play</button></h3>
+            <span class="text-center text-info" id="game_msg"> </span>
         </div>
-        <div class="panel sub-right-panel col-xs-4 col-md-4" id="player_stats">
+        <div class="text-center panel sub-right-panel col-xs-4 col-md-4" id="game_messages" >
+            <h4><span class="text-center text-info "> Turn Status </span></h4>
+            <div id="PlayerTurn" class="text-center">
 
+            </div>
         </div>
-        <div class="panel sub-right-panel col-xs-4 col-md-4" id="game_messages">
 
+        <div class="text-center panel sub-right-panel col-xs-4 col-md-4">
+            <h4><span class="text-center text-info"> Player 1 Score:   </span> </h4>
+            <span class="text-center text-info" id="player1_stats"> </span>
+            <hr>
+            <h4><span class="text-center text-info">Computer Score:   </span> </h4>
+            <span class="text-center text-info" id="player2_stats"> </span>
         </div>
     </div>
+
+
 </div>
+
+
