@@ -92,11 +92,7 @@ var server = app.listen(app.get('port'), function(){
 var io = socket(server);
 //on connection
 io.on('connection', (socket)=>{
-
-      
       console.log('made socket connection \n'+socket.id);
-      
-
 // when user is typing ,show typing message to all connected user
       socket.on('typing', function (data){
           socket.broadcast.emit('typing', data);
