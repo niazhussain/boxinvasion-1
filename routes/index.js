@@ -7,7 +7,9 @@ router.get('/', ensureAuthenticated, function(req, res){
 	res.render('index', {title: req.user.name,userName: req.user.name ,condition:false });
 	
 	var sess = req.session;
-	console.log(sess.passport.user);
+	// var packet = socket.handshake.session;
+	console.log('\nSession ID : '+sess.id);
+	// console.log(packet);
 
 });
 
