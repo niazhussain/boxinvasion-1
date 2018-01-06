@@ -1,3 +1,4 @@
+
 //Establish the connection
 //const socket = io.connect('http://localhost:3000/');//Already connection in app.js so commented
 

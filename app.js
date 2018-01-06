@@ -6,15 +6,23 @@ var exphbs = require('express-handlebars');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 var session = require('express-session');
+var sharedsession = require('express-socket.io-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var jwtStrategy = require('passport-jwt').Strategy;
+var extractJwt =  require('passport-jwt').ExtractJwt;
+var jwt = require('jsonwebtoken');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var socket = require('socket.io');
+var CircularJSON = require('circular-json');
+
 mongoose.connect('mongodb://localhost/loginapp');
 var db = mongoose.connection;
 //mongoose.Promise=global.Promise;
 //var db = mongoose.createConnection('mongodb://localhost/loginapp');
+
+var socketserver = require('./socketserver/socketserver');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -89,32 +97,86 @@ var server = app.listen(app.get('port'), function(){
 
 
 //********************************************************//
+// var io = socket(server);
+
+// io.use(sharedsession(session, {
+//     autoSave:true
+// }));
+
+
+// io.on('connection', (socket)=> {
+//     // Accept a login event with user's data
+//     console.log('Connection made \n' + socket.id);
+
+//     var packet = socket.handshake.session;
+//     console.log(packet);
+
+//     // socket.on("login", function(userdata) {
+//     //     socket.handshake.session.userdata = userdata;
+//     //     socket.handshake.session.save();
+//     // });
+//     // socket.on("logout", function(userdata) {
+//     //     if (socket.handshake.session.userdata) {
+//     //         delete socket.handshake.session.userdata;
+//     //         socket.handshake.session.save();
+//     //     }
+//     // });        
+// });
+
+
+//********************************************************//
+
 var io = socket(server);
-//on connection
+
+//Socket Middleware to handle every socket connection and request
+io.use((socket, next) => {
+  // console.log('\nMade a new connection \n '+socket.id);
+  // console.log('with Token : '+CircularJSON.stringify(socket.handshake.query.token));
+  // console.log('from user : '+jwt.decode(socket.handshake.query.token));
+  // console.log('_________________________________');
+
+  socketserver.handleConnection(socket.handshake.query.token, socket.id, function(err){
+      if(err) throw err;
+      //console.log(user);
+  });
+  console.log('socket ID is : '+socket.id);
+  
+  next();
+});
+
+
+
 io.on('connection', (socket)=>{
-      console.log('made socket connection \n'+socket.id);
-// when user is typing ,show typing message to all connected user
-      socket.on('typing', function (data){
-          socket.broadcast.emit('typing', data);
-      });
 
-      socket.on('not typing', function (){
-          socket.broadcast.emit('not typing');
-      });
+          // io.engine.generateId = (req) => {
+          //   return req.user.id // custom id must be unique
+          // } 
+      
+// // when user is typing ,show typing message to all connected user
+//       socket.on('typing', function (data){
+//           socket.broadcast.emit('typing', data);
+//       });
 
-      // chat data
-      socket.on('chat', function (data) {
+//       socket.on('not typing', function (){
+//           socket.broadcast.emit('not typing');
+//       });
 
-          console.log("client id: "+ socket.id);
-          io.sockets.emit('chat', data);
-      });
+//       // chat data
+//       socket.on('chat', function (data) {
 
-      socket.on('invite', function(data) {
+//           console.log("client id: "+ socket.id);
+//           io.sockets.emit('chat', data);
+//       });
 
-      });
+//       socket.on('invite', function(data) {
 
-      socket.on('game', function(data) {
+//       });
 
-      });
+//       socket.on('game', function(data) {
+
+//       });
 
 });
+
+//********************************************************//
+

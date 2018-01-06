@@ -33,6 +33,11 @@ for (var i = dotX; i < numberOfDots; i++) {
 
 $( document ).ready(function() {
 
+
+    //alert("called");
+
+
+
     $("#Leave_Game").hide();
 
     $( "#Play" ).click(function() {
@@ -56,7 +61,7 @@ $( document ).ready(function() {
 
 
 
-
+var player1Name = "P1";
 var player2Name = "n/a" ;
 var TurnStatus = "P1";
 
@@ -338,12 +343,40 @@ function CalculateScore()
             }
         }
     }
+    if(score1+score2 == 25)
+    {
+        if(score1 > score2)
+        {
+            WinningUpdate(document.getElementById("user").innerHTML);
+        }
+        else
+        {
+            WinningUpdate(player2Name);
+        }
+    }
     Player1Score = score1;
     Player2Score = score2;
    // alert(Player1Score);
 }
 // HTMLCanvasElement.prototype.getPosition = getPosition;
 
+
+function WinningUpdate(WinnerName) {
+    /*$('#myModal').modal('show');
+    $('#modal_title').innerHTML = "Congratulations "+WinnerName;
+    $('#modal_message').innerHTML = "You Win";
+    $('#modal_yes').click(function () {
+        $('#Leave_Game').trigger('click');
+    })*/
+
+    $('.Celebration').fireworks({
+        sound: true, // sound effect
+        opacity: 0.4,
+        width: '20%',
+        height: '30%'
+    });
+
+}
 function CheckBoxCompleted(HLineNo , VLineNo , isHorizontal , isVertical){
     if(isHorizontal)
     {
@@ -529,3 +562,5 @@ modalConfirm(function(confirm){
         $("#result").html("Challenge to start the game");
     }
 });
+
+

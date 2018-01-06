@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
+var jwt = require('jsonwebtoken');
+
+
 
 // User Schema
 var UserSchema = mongoose.Schema({
@@ -46,6 +49,7 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
 	});
 }
 
+
 module.exports.find = function(collec, query, callback){
     mongoose.connection.db.collection(collec, function (err, collection) {
         collection.find(query).toArray(callback);
@@ -53,3 +57,4 @@ module.exports.find = function(collec, query, callback){
 }
 
 module.exports.arr = [];
+
