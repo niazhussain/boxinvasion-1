@@ -2,121 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09214584-0e5c-466f-b91e-c53bc8cc08e8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/1.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/10.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/100.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/101.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/102.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/103.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/104.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/105.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/106.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/107.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/108.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/11.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/12.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/13.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/14.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/15.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/16.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/17.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/18.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/19.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/2.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/20.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/21.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/22.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/23.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/24.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/25.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/26.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/27.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/28.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/29.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/3.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/30.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/31.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/32.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/33.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/34.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/35.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/36.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/37.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/38.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/39.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/4.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/40.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/41.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/42.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/43.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/44.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/45.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/46.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/47.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/48.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/49.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/5.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/50.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/51.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/52.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/53.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/54.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/55.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/56.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/57.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/58.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/59.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/6.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/60.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/61.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/62.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/63.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/64.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/65.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/66.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/67.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/68.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/69.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/7.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/70.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/71.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/72.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/73.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/74.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/75.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/76.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/77.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/78.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/79.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/8.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/80.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/81.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/82.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/83.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/84.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/85.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/86.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/87.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/88.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/89.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/9.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/90.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/91.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/92.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/93.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/94.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/95.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/96.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/97.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/98.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emoji/99.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/emojiicon.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/chat.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/game/celebrate.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/game/jquery.fireworks.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/style.css" afterPath="$PROJECT_DIR$/public/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/chat/chatclient.js" afterPath="$PROJECT_DIR$/public/js/chat/chatclient.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/layouts/layout.handlebars" afterPath="$PROJECT_DIR$/views/layouts/layout.handlebars" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/game/gameclient.js" afterPath="$PROJECT_DIR$/public/js/game/gameclient.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.handlebars" afterPath="$PROJECT_DIR$/views/index.handlebars" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -130,29 +20,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="index.handlebars" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.handlebars" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/index.handlebars">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="96" column="6" lean-forward="true" selection-start-line="96" selection-start-column="6" selection-end-line="96" selection-end-column="6" />
-              <folding>
-                <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#div#1;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="-1652">
+              <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="users.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/users.js">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2107">
-              <caret line="101" column="8" lean-forward="false" selection-start-line="101" selection-start-column="8" selection-end-line="101" selection-end-column="8" />
-              <folding />
+            <state relative-caret-position="154">
+              <caret line="100" column="36" lean-forward="false" selection-start-line="100" selection-start-column="36" selection-end-line="100" selection-end-column="36" />
+              <folding>
+                <marker date="1514990025762" expanded="true" signature="2438:2592" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -167,40 +52,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.handlebars" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/login.handlebars">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="11" column="7" lean-forward="false" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="game.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gameserver/game.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-161">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="boards.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gameserver/boards.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="layout.handlebars" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/layouts/layout.handlebars">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
+            <state relative-caret-position="1113">
               <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
               <folding />
             </state>
@@ -210,28 +65,48 @@
       <file leaf-file-name="gameclient.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/game/gameclient.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2490">
-              <caret line="47" column="41" lean-forward="false" selection-start-line="47" selection-start-column="41" selection-end-line="47" selection-end-column="41" />
+            <state relative-caret-position="322">
+              <caret line="562" column="5" lean-forward="true" selection-start-line="562" selection-start-column="5" selection-end-line="562" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gameengine.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gameserver/gameengine.js">
+      <file leaf-file-name="active.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/active.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="483">
+              <caret line="23" column="1" lean-forward="false" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chatclient.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/chat/chatclient.js">
+      <file leaf-file-name="socketclient.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/js/socket/socketclient.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="0" column="20" lean-forward="true" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="10" column="3" lean-forward="true" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jquery.fireworks.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/game/jquery.fireworks.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5922">
+              <caret line="282" column="39" lean-forward="false" selection-start-line="282" selection-start-column="39" selection-end-line="282" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -253,6 +128,9 @@
       <find>messageArea</find>
       <find>flash</find>
       <find>title</find>
+      <find>context</find>
+      <find>fillStyle</find>
+      <find>fireworks</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -263,9 +141,10 @@
       <list>
         <option value="$PROJECT_DIR$/public/css/style.css" />
         <option value="$PROJECT_DIR$/routes/index.js" />
-        <option value="$PROJECT_DIR$/public/js/game/gameclient.js" />
         <option value="$PROJECT_DIR$/views/layouts/layout.handlebars" />
+        <option value="$PROJECT_DIR$/public/js/game/jquery.fireworks.js" />
         <option value="$PROJECT_DIR$/views/index.handlebars" />
+        <option value="$PROJECT_DIR$/public/js/game/gameclient.js" />
       </list>
     </option>
   </component>
@@ -280,7 +159,7 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="width" value="976" />
     <option name="height" value="1038" />
@@ -301,6 +180,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -357,7 +237,19 @@
             <path>
               <item name="boxinvasion" type="b2602c69:ProjectViewProjectNode" />
               <item name="boxinvasion" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="socket" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="boxinvasion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="boxinvasion" type="462c0819:PsiDirectoryNode" />
               <item name="routes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="boxinvasion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="boxinvasion" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="boxinvasion" type="b2602c69:ProjectViewProjectNode" />
@@ -374,7 +266,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -434,33 +325,34 @@
       <workItem from="1514907990471" duration="4486000" />
       <workItem from="1514982173223" duration="22972000" />
       <workItem from="1515072060677" duration="26023000" />
-      <workItem from="1515159828704" duration="7943000" />
+      <workItem from="1515159828704" duration="17686000" />
+      <workItem from="1515245747795" duration="1850000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61424000" />
+    <option name="totallyTimeSpent" value="73017000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14436805" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18138552" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32918552" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32918552" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39932126" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39932126" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -477,26 +369,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/views/index.handlebars">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1743">
-          <caret line="83" column="31" lean-forward="false" selection-start-line="83" selection-start-column="31" selection-end-line="83" selection-end-column="31" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#1;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/users.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2121">
           <caret line="101" column="8" lean-forward="false" selection-start-line="101" selection-start-column="8" selection-end-line="101" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -512,7 +388,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="11" column="7" lean-forward="false" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -540,19 +415,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/chat.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="40" column="13" lean-forward="false" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/chat.js" />
     <entry file="file://$PROJECT_DIR$/public/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3087">
           <caret line="147" column="1" lean-forward="false" selection-start-line="147" selection-start-column="1" selection-end-line="147" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -578,14 +445,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
           <caret line="22" column="40" lean-forward="false" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#1;n#!!top" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -593,7 +453,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -609,7 +468,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="11" column="7" lean-forward="true" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -641,7 +499,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2163">
           <caret line="103" column="13" lean-forward="false" selection-start-line="103" selection-start-column="13" selection-end-line="103" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -660,14 +517,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/chat.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="52" lean-forward="false" selection-start-line="1" selection-start-column="52" selection-end-line="1" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/chat.js" />
     <entry file="file://$PROJECT_DIR$/models/game.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
@@ -679,14 +529,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
           <caret line="34" column="21" lean-forward="false" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#1;n#!!top" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -742,14 +585,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/active.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="23" column="1" lean-forward="false" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -757,7 +592,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -765,33 +599,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3087">
           <caret line="147" column="1" lean-forward="false" selection-start-line="147" selection-start-column="1" selection-end-line="147" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/chat.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="40" column="13" lean-forward="false" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1218">
-          <caret line="100" column="36" lean-forward="false" selection-start-line="100" selection-start-column="36" selection-end-line="100" selection-end-column="36" />
-          <folding>
-            <marker date="1514990025762" expanded="true" signature="2438:2592" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/chat.js" />
     <entry file="file://$PROJECT_DIR$/routes/users.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2107">
           <caret line="101" column="8" lean-forward="false" selection-start-line="101" selection-start-column="8" selection-end-line="101" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -799,15 +614,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="11" column="7" lean-forward="false" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" column="22" lean-forward="false" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -821,7 +627,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gameserver/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-161">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -835,6 +641,80 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/game/celebrate.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="34" column="27" lean-forward="false" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="14" column="22" lean-forward="false" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/game/jquery.fireworks.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5922">
+          <caret line="282" column="39" lean-forward="false" selection-start-line="282" selection-start-column="39" selection-end-line="282" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/layouts/layout.handlebars">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1113">
+          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="100" column="36" lean-forward="false" selection-start-line="100" selection-start-column="36" selection-end-line="100" selection-end-column="36" />
+          <folding>
+            <marker date="1514990025762" expanded="true" signature="2438:2592" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index.handlebars">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1652">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/game/gameclient.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="562" column="5" lean-forward="true" selection-start-line="562" selection-start-column="5" selection-end-line="562" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/active.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="23" column="1" lean-forward="false" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="3" lean-forward="true" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/gameserver/gameengine.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -843,34 +723,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/layouts/layout.handlebars">
+    <entry file="file://$PROJECT_DIR$/public/js/socket/socketclient.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="20" lean-forward="true" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/game/gameclient.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2490">
-          <caret line="47" column="41" lean-forward="false" selection-start-line="47" selection-start-column="41" selection-end-line="47" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/index.handlebars">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="96" column="6" lean-forward="true" selection-start-line="96" selection-start-column="6" selection-end-line="96" selection-end-column="6" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#1;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
