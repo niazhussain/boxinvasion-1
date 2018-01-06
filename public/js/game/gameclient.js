@@ -31,6 +31,8 @@ for (var i = dotX; i < numberOfDots; i++) {
 }
 
 
+
+
 $( document ).ready(function() {
 
 
@@ -42,7 +44,7 @@ $( document ).ready(function() {
 
     $( "#Play" ).click(function() {
         var canvas = document.getElementById("canvas");
-        canvas.addEventListener('click', getPosition , false);
+        canvas.addEventListener('click', getPosition , true);
 
         document.getElementById("game_msg").innerHTML = "<h3><span> Make a first move </span></h3>";
 
@@ -74,16 +76,18 @@ function getPosition(event)
     x = event.offsetX || event.layerX ;
     y = event.offsetY || event.layerY ;
 
-    IsHorizontal(x,y);
-    IsVertical(x,y);
+    if(TurnStatus == "COM") {
+        return;
+    }
 
-
+    IsHorizontal(x, y);
+    IsVertical(x, y);
 
     player2Name = "Com";
     //alert(TurnStatus + " turn");
     if(TurnStatus != "P1")
     {
-            setTimeout(ComputerTurn, 800);
+            setTimeout(ComputerTurn, 1000);
     }
 
     //update turn message after Player's turn.
@@ -101,6 +105,7 @@ function getPosition(event)
 
 }
 function ComputerTurn(){
+    value =true;
 
     var bComTurn = true;
     var ComputerHorizontalLineNumber;
@@ -130,7 +135,7 @@ function ComputerTurn(){
     }
     // IF COMPUTER GETS EXTRA TURN.
     if(TurnStatus == "COM")
-        setTimeout(ComputerTurn, 800);
+        setTimeout(ComputerTurn, 2000);
     else
         TurnStatus = "P1";
 
@@ -347,11 +352,14 @@ function CalculateScore()
     {
         if(score1 > score2)
         {
-            WinningUpdate(document.getElementById("user").innerHTML);
+            alert(document.getElementById("user").value);
+            WinningUpdate(document.getElementById("user").value,true);
+            TurnStatus = "";
         }
         else
         {
-            WinningUpdate(player2Name);
+            WinningUpdate(document.getElementById("user").value,false);
+            TurnStatus = "";
         }
     }
     Player1Score = score1;
@@ -361,20 +369,23 @@ function CalculateScore()
 // HTMLCanvasElement.prototype.getPosition = getPosition;
 
 
-function WinningUpdate(WinnerName) {
-    /*$('#myModal').modal('show');
-    $('#modal_title').innerHTML = "Congratulations "+WinnerName;
-    $('#modal_message').innerHTML = "You Win";
-    $('#modal_yes').click(function () {
-        $('#Leave_Game').trigger('click');
-    })*/
-
-    $('.Celebration').fireworks({
+function WinningUpdate(WinnerName, WinningStatus) {
+    $('#myModal').modal('show');
+    //alert(WinnerName);
+    if(WinningStatus)
+    {
+        $('#modal_title').html( "You Win !! Congratulations");
+        $('.Celebration').fireworks({
         sound: true, // sound effect
         opacity: 0.4,
         width: '20%',
         height: '30%'
     });
+    }
+    else
+    {
+        $('#modal_title').html( "You lose !!" );
+    }
 
 }
 function CheckBoxCompleted(HLineNo , VLineNo , isHorizontal , isVertical){
@@ -405,7 +416,8 @@ function CheckBoxCompleted(HLineNo , VLineNo , isHorizontal , isVertical){
 
             PopulateBoxCapturedArray(HLineNo , VLineNo);
             CalculateScore();
-
+            //alert(document.getElementById("user").value);
+            WinningUpdate(document.getElementById("user").value,false);
         }
         if(HorizontalArrayLineStatus[HLineNo][VLineNo - 1] == "Filled" &&
             VerticalArrayLineStatus[VLineNo - 1][HLineNo + 1] == "Filled" &&
@@ -537,9 +549,9 @@ function sendMove() // update the game object and send it to gameEngine
 
 // this is for show modal on the page load
 
-    $(window).on('load',function(){
+   /* $(window).on('load',function(){
         $('#myModal').modal('show');
-    });
+    });*/
 
 
 var modalConfirm = function(callback){
@@ -557,7 +569,7 @@ var modalConfirm = function(callback){
 
 modalConfirm(function(confirm){
     if(confirm){
-        $("#result").html("You are playing with Computer");
+        $("#Leave_Game").trigger('click');
     }else{
         $("#result").html("Challenge to start the game");
     }
