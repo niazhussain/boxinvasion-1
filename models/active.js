@@ -1,32 +1,47 @@
 var mongoose = require('mongoose');
-
+var jwt = require('jsonwebtoken');
 
 // ActiveUser Schema
-var ActiveUserSchema = mongoose.Schema({
+var ActiveSchema = mongoose.Schema({
 	userid: {
-		type: String
-	},
-	username: {
 		type: String
 	},
 	socketid: {
 		type: String
 	},
 	isplaying: {
-		type: Boolean
+		type: Boolean,
+		default : false
 	}
 });
 
-var ActiveUser = module.exports = mongoose.model('ActiveUser', ActiveUserSchema);
+var Active = module.exports = mongoose.model('Active', ActiveSchema);
 
-module.exports.createActiveUser = function(newUser, callback){
+
+
+module.exports.getUserByID = function(id, callback){
+	var query = {userid: id};
+	Active.findOne(query, callback);
+}
+
+module.exports.addActive = function(active, callback){
+
+	active.save(callback);
+}
+
+module.exports.updateActive = function (active, callback){
+
+	var id = active.userid;
+	var socketid = active.socketid;
+
+	Active.findOneAndUpdate({userid: id}, {$set:{socketid: socketid }},function(err, doc){
+	    if(err){
+	        console.log("Something wrong when updating data!");
+	    }
+	});
 
 }
 
-module.exports.deleteActiveUser = function(newUser, callback){
-
-}
-
-module.exports.updatePlayingStatus = function(newUser, callback){
+module.exports.deleteByID = function(token, callback){
 
 }
