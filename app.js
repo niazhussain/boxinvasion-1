@@ -147,7 +147,11 @@ io.use((socket, next) => {
 
 
 io.on('connection', (socket)=>{
+    socket.on('newuser', function (data) {
 
+        console.log("client id: "+ socket.id);
+           socket.broadcast.emit('newuser', data);
+   });
           // io.engine.generateId = (req) => {
           //   return req.user.id // custom id must be unique
           // } 
