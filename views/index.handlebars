@@ -5,6 +5,8 @@
 
 <b><div class="alert text-center " role="alert" id="result"></div></b>
 
+
+
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -35,6 +37,14 @@
     <div class="row chat-window col-xs-4 col-md-4" id="chat_window" style="margin-left:-50px;">
         <!--<div class="col-xs-12 col-md-12">-->
         <div class="panel">
+<div class="list-users">
+                  <p>Users:</p>
+                   {{#each myusers }}
+                   <ul>
+                      <li><a href="{{this.id}}">{{name}}</a></li> 
+                   </ul>
+                   {{/each}}
+                   </div>
             <div id="box-invasion-chat-div" class=" panel-primary">
                 <h2 class="panel-heading">Discussion</h2>
                 <div id="box-invasion-chat-win" style="margin-bottom: 0px" class="">
@@ -68,11 +78,7 @@
     <script src="/js/chat/chatclient.js"><{{!}}/script>
     <script src="/js/game/gameclient.js"><{{!}}/script>
 
-    <div class="row right-panel col-xs-4 col-md-4" id="right_panel_1" style="margin-right:-70px;">
-
-    <div class="row right-panel col-xs-4 col-md-4" id="right_panel_1" style="margin-right:-50px;">
-
-        <div class="panel sub-right-panel col-xs-4 col-md-4" id="game_options" >
+    <script src="/js/game/jquery.fireworks.js"><{{!}}/script>
 
     <div class="row right-panel col-xs-4 col-md-4" id="right_panel_1" style="margin-right:-70px;">
         <div class="text-center panel sub-right-panel col-xs-4 col-md-4" id="game_options">
@@ -84,7 +90,7 @@
         </div>
         <div class="text-center panel sub-right-panel col-xs-4 col-md-4" id="game_messages" >
             <h4><span class="text-center text-info "> Turn Status </span></h4>
-            <div id="PlayerTurn" class="text-center">
+            <div id="PlayerTurn" class="text-centr">
 
             </div>
         </div>
@@ -96,6 +102,8 @@
             <h4><span class="text-center text-info">Computer Score:   </span> </h4>
             <span class="text-center text-info" id="player2_stats"> </span>
         </div>
+    </div>
+    <div class="Celebration">
     </div>
 
 
