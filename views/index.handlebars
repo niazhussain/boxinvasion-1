@@ -37,6 +37,14 @@
     <div class="row chat-window col-xs-4 col-md-4" id="chat_window" style="margin-left:-50px;">
         <!--<div class="col-xs-12 col-md-12">-->
         <div class="panel">
+<div class="list-users">
+                  <p>Users:</p>
+                   {{#each myusers }}
+                   <ul>
+                      <li><a href="{{this.id}}">{{name}}</a></li> 
+                   </ul>
+                   {{/each}}
+                   </div>
             <div id="box-invasion-chat-div" class=" panel-primary">
                 <h2 class="panel-heading">Discussion</h2>
                 <div id="box-invasion-chat-win" style="margin-bottom: 0px" class="">
