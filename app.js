@@ -96,36 +96,7 @@ var server = app.listen(app.get('port'), function(){
 });
 
 
-//********************************************************//
-// var io = socket(server);
-
-// io.use(sharedsession(session, {
-//     autoSave:true
-// }));
-
-
-// io.on('connection', (socket)=> {
-//     // Accept a login event with user's data
-//     console.log('Connection made \n' + socket.id);
-
-//     var packet = socket.handshake.session;
-//     console.log(packet);
-
-//     // socket.on("login", function(userdata) {
-//     //     socket.handshake.session.userdata = userdata;
-//     //     socket.handshake.session.save();
-//     // });
-//     // socket.on("logout", function(userdata) {
-//     //     if (socket.handshake.session.userdata) {
-//     //         delete socket.handshake.session.userdata;
-//     //         socket.handshake.session.save();
-//     //     }
-//     // });        
-// });
-
-
-//********************************************************//
-
+//*************************SOCKET***************************//
 var io = socket(server);
 
 //Socket Middleware to handle every socket connection and request
@@ -139,15 +110,21 @@ io.use((socket, next) => {
       if(err) throw err;
       //console.log(user);
   });
+  // socket.broadcastActiveUsers();
   console.log('socket ID is : '+socket.id);
-  
+
   next();
 });
 
 
 
 io.on('connection', (socket)=>{
+    socket.on('newuser', function (data) {
 
+
+        console.log("client id: "+ socket.id);
+           socket.broadcast.emit('newuser', data);
+   });
           // io.engine.generateId = (req) => {
           //   return req.user.id // custom id must be unique
           // } 
@@ -176,6 +153,15 @@ io.on('connection', (socket)=>{
 
 //       });
 
+  socket.on('disconnect', function () {
+      socketserver.handleDisconnect(socket.handshake.query.token, socket.id, function(err){
+        if(err) throw err;
+      });
+
+
+      // socket.broadcastActiveUsers();
+      console.log('disconnected');
+  });
 });
 
 //********************************************************//
