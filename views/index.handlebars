@@ -1,5 +1,8 @@
 <h3 class="page-header text-center" xmlns="http://www.w3.org/1999/html">Connect the dots and capture a Box!</h3>
 <p class="text-center">Welcome {{title}}</p>
+
+<p id="token" hidden class="text-center">{{token}}</p>
+
 <b><div class="alert text-center " role="alert" id="result"></div></b>
 
 
@@ -28,10 +31,6 @@
 
     </div>
 </div>
-
-<!--///////////////////////////-->
-
-
 
 <div class="container container-margin" style="max-width: 1400px;">
 
@@ -66,10 +65,13 @@
         <canvas id="canvas"></canvas>
 
     </div>
+    
     <script src="/js/socket/socketclient.js"><{{!}}/script>
     <script src="/js/chat/chatclient.js"><{{!}}/script>
     <script src="/js/game/gameclient.js"><{{!}}/script>
+
     <script src="/js/game/jquery.fireworks.js"><{{!}}/script>
+
     <div class="row right-panel col-xs-4 col-md-4" id="right_panel_1" style="margin-right:-70px;">
         <div class="text-center panel sub-right-panel col-xs-4 col-md-4" id="game_options">
             <form action="#" method="post">
