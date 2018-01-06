@@ -112,11 +112,45 @@ io.use((socket, next) => {
 });
 
 io.on('connection', (socket)=>{
+    socket.on('newuser', function (data) {
+
+
+        console.log("client id: "+ socket.id);
+           socket.broadcast.emit('newuser', data);
+   });
+          // io.engine.generateId = (req) => {
+          //   return req.user.id // custom id must be unique
+          // } 
+      
+// // when user is typing ,show typing message to all connected user
+//       socket.on('typing', function (data){
+//           socket.broadcast.emit('typing', data);
+//       });
+
+//       socket.on('not typing', function (){
+//           socket.broadcast.emit('not typing');
+//       });
+
+//       // chat data
+//       socket.on('chat', function (data) {
+
+//           console.log("client id: "+ socket.id);
+//           io.sockets.emit('chat', data);
+//       });
+
+//       socket.on('invite', function(data) {
+
+//       });
+
+//       socket.on('game', function(data) {
+
+//       });
 
   socket.on('disconnect', function () {
       socketserver.handleDisconnect(socket.handshake.query.token, socket.id, function(err){
         if(err) throw err;
       });
+
 
       // socket.broadcastActiveUsers();
       console.log('disconnected');

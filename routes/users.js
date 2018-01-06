@@ -99,6 +99,12 @@ router.get('/logout', function(req, res){
 	req.logout();
 
 
+	/*Active.deleteByID(req.user.id, function() {
+		
+	});*/
+
+
+
 	req.flash('success_msg', 'You are logged out');
 
 	res.redirect('/users/login');

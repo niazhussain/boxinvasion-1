@@ -44,10 +44,53 @@ socket.on('not typing', function(){
     console.log("not typing");
     document.getElementById("typingMessage").innerHTML="";
 });
+
 $( document ).ready(function() {
+
+    /*
+     var emojiContainer = document.getElementById("onlineuser"),
+     docFragment = document.createDocumentFragment();
+     for (var i = 108; i > 0; i--) {
+     var emojiElement = document.createElement("img");
+     emojiElement.src = "../images/emoji/" + i + ".gif";
+     emojiElement.title = i;
+     docFragment.appendChild(emojiElement);
+     };
+     emojiContainer.appendChild(docFragment);*/
     setInterval(function(){updateTimeAgo()}, 5000);
     //updateTimeAgo();
     user=$("#user").val();
+   /* socket.emit('newuser',{
+        onlineuser:user
+    });*/
+    socket.on('newuser', function(data){
+        if(data.user===$("#user").val())
+        {
+            var onlineUser = document.getElementById("onlineuser");
+            docFragment = document.createDocumentFragment();
+            var li = document.createElement("li");
+            // emojiElement.src = "../images/emoji/" + i + ".gif";
+            li.text = data.onlineuser;
+            li.id=data.onlineuser;
+            docFragment.appendChild(li);
+            onlineUser.appendChild(docFragment);
+            // document.getElementById("typingMessage").innerHTML="";
+        }
+        else
+        {
+            var onlineUser = document.getElementById("onlineuser");
+            docFragment = document.createDocumentFragment();
+            var li = document.createElement("li");
+            // emojiElement.src = "../images/emoji/" + i + ".gif";
+            li.text = data.onlineuser;
+            li.id=data.onlineuser;
+            docFragment.appendChild(li);
+            onlineUser.appendChild(docFragment);
+            // document.getElementById("typingMessage").innerHTML="";
+        }
+        console.log("new user on");
+
+    });
     $( "#send" ).click(function() {
         var nullMessage=message.value.replace(/\s/g, '');
         if(nullMessage!== "")
