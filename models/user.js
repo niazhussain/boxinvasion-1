@@ -19,9 +19,6 @@ var UserSchema = mongoose.Schema({
 	},
 	name: {
 		type: String
-	},
-	token: {
-		type: String
 	}
 });
 

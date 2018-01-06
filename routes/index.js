@@ -18,6 +18,10 @@ router.get('/', ensureAuthenticated, function(req, res){
 
 });
 
+router.post('/', function (req,res) {
+	res.redirect('/');
+
+});
 
 
 function ensureAuthenticated(req, res, next){

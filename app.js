@@ -16,10 +16,13 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var socket = require('socket.io');
 var CircularJSON = require('circular-json');
+
 mongoose.connect('mongodb://localhost/loginapp');
 var db = mongoose.connection;
 //mongoose.Promise=global.Promise;
 //var db = mongoose.createConnection('mongodb://localhost/loginapp');
+
+var socketserver = require('./socketserver/socketserver');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -124,21 +127,20 @@ var server = app.listen(app.get('port'), function(){
 //********************************************************//
 
 var io = socket(server);
-//on connection
 
-// io.use(sharedsession(session, {
-//     autoSave:true
-// }));
-
+//Socket Middleware to handle every socket connection and request
 io.use((socket, next) => {
-  console.log('\nMade a new connection \n '+socket.id);
-  console.log('with Token : '+CircularJSON.stringify(socket.handshake.query.token));
-  console.log('from user : '+jwt.decode(socket.handshake.query.token));
-  console.log('_________________________________');
-  // console.log(client.req);
-  // let handshake = socket.handshake;
-  // console.log(handshake);
-  // console.log(socket.request);
+  // console.log('\nMade a new connection \n '+socket.id);
+  // console.log('with Token : '+CircularJSON.stringify(socket.handshake.query.token));
+  // console.log('from user : '+jwt.decode(socket.handshake.query.token));
+  // console.log('_________________________________');
+
+  socketserver.handleConnection(socket.handshake.query.token, socket.id, function(err){
+      if(err) throw err;
+      //console.log(user);
+  });
+  console.log('socket ID is : '+socket.id);
+  
   next();
 });
 
