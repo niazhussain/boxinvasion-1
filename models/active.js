@@ -45,6 +45,14 @@ module.exports.updateActive = function (active, callback){
 
 }
 
-module.exports.deleteByID = function(token, callback){
+module.exports.deleteByID = function(id, callback){
 
+	Active.findOneAndRemove({userid: id}, function (err, doc) {
+		if(err) {
+			throw err;
+		}
+		else {
+			console.log('user deleted');
+		}
+	});
 }

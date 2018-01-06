@@ -30,31 +30,53 @@ function Board () {
 	this.width = 5;
 
 	//array of dots
+<<<<<<< HEAD
+	this.dots[][] = 
+	x, y pos
+	color 
+=======
 	this.dots[][] =
 	x, y pos
 	color
+>>>>>>> a9df8f75ac5d059647a1d3172253299c91bb9d37
 
 
 
 	this.tiles[][] =
 	x, y pos
+<<<<<<< HEAD
+	empty color 
+=======
 	empty color
+>>>>>>> a9df8f75ac5d059647a1d3172253299c91bb9d37
 	filled color [player 1, player 2]
 	captured = bool
 	captured by = playerID
 
 
+<<<<<<< HEAD
+	this.hline[][] = 
+	x, y pos
+	empty color 
+=======
 	this.hline[][] =
 	x, y pos
 	empty color
+>>>>>>> a9df8f75ac5d059647a1d3172253299c91bb9d37
 	filled color [player 1, player 2]
 	DRAWN = bool
 	DRAWN by = playerID
 
 
+<<<<<<< HEAD
+	this.vline[][] = 
+	x, y pos
+	empty color 
+=======
 	this.vline[][] =
 	x, y pos
 	empty color
+>>>>>>> a9df8f75ac5d059647a1d3172253299c91bb9d37
 	filled color [player 1, player 2]
 	DRAWN = bool
 	DRAWN By = playerID
@@ -64,3 +86,8 @@ function Board () {
 	board draw();
 
 }
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> a9df8f75ac5d059647a1d3172253299c91bb9d37
