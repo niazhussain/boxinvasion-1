@@ -96,86 +96,31 @@ var server = app.listen(app.get('port'), function(){
 });
 
 
-//********************************************************//
-// var io = socket(server);
-
-// io.use(sharedsession(session, {
-//     autoSave:true
-// }));
-
-
-// io.on('connection', (socket)=> {
-//     // Accept a login event with user's data
-//     console.log('Connection made \n' + socket.id);
-
-//     var packet = socket.handshake.session;
-//     console.log(packet);
-
-//     // socket.on("login", function(userdata) {
-//     //     socket.handshake.session.userdata = userdata;
-//     //     socket.handshake.session.save();
-//     // });
-//     // socket.on("logout", function(userdata) {
-//     //     if (socket.handshake.session.userdata) {
-//     //         delete socket.handshake.session.userdata;
-//     //         socket.handshake.session.save();
-//     //     }
-//     // });        
-// });
-
-
-//********************************************************//
-
+//*************************SOCKET***************************//
 var io = socket(server);
 
 //Socket Middleware to handle every socket connection and request
 io.use((socket, next) => {
-  // console.log('\nMade a new connection \n '+socket.id);
-  // console.log('with Token : '+CircularJSON.stringify(socket.handshake.query.token));
-  // console.log('from user : '+jwt.decode(socket.handshake.query.token));
-  // console.log('_________________________________');
 
   socketserver.handleConnection(socket.handshake.query.token, socket.id, function(err){
       if(err) throw err;
-      //console.log(user);
   });
+  // socket.broadcastActiveUsers();
   console.log('socket ID is : '+socket.id);
-  
   next();
+
 });
-
-
 
 io.on('connection', (socket)=>{
 
-          // io.engine.generateId = (req) => {
-          //   return req.user.id // custom id must be unique
-          // } 
-      
-// // when user is typing ,show typing message to all connected user
-//       socket.on('typing', function (data){
-//           socket.broadcast.emit('typing', data);
-//       });
+  socket.on('disconnect', function () {
+      socketserver.handleDisconnect(socket.handshake.query.token, socket.id, function(err){
+        if(err) throw err;
+      });
 
-//       socket.on('not typing', function (){
-//           socket.broadcast.emit('not typing');
-//       });
-
-//       // chat data
-//       socket.on('chat', function (data) {
-
-//           console.log("client id: "+ socket.id);
-//           io.sockets.emit('chat', data);
-//       });
-
-//       socket.on('invite', function(data) {
-
-//       });
-
-//       socket.on('game', function(data) {
-
-//       });
-
+      // socket.broadcastActiveUsers();
+      console.log('disconnected');
+  });
 });
 
 //********************************************************//
