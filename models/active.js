@@ -12,6 +12,9 @@ var ActiveSchema = mongoose.Schema({
 	isplaying: {
 		type: Boolean,
 		default : false
+	},
+	username:{
+		type: String
 	}
 });
 

@@ -12,9 +12,9 @@ router.get('/', ensureAuthenticated, function(req, res){
 	console.log(name);
 	let arr =[];
 	arr.push(currentUserId);
-
 	//var count =0 , length = arr.length;
-	User.find('users', {}, function (err, ListOfUsers) {
+	User.getUserById(currentUserId);
+	User.find('actives', {}, function (err, ListOfUsers) {
 
 		/*
 		for(let i = 0; i<ListOfUsers.length; ++i)
@@ -37,17 +37,16 @@ router.get('/', ensureAuthenticated, function(req, res){
 		*/
 		if(err) throw err;
 		req.session.ListOfUsers = ListOfUsers;
-		
+
 		
 	});
 
-
-
-
-
-	res.render('index', {title: req.user.name,userName: req.user.name ,condition:false,myusers: req.session.ListOfUsers });
+	//res.render('index', {title: req.user.name,userName: req.user.name ,condition:false,myusers: req.session.ListOfUsers });
 
 	var token = jwt.sign(req.user.id, 'secret');
+
+
+	res.render('index', {title: req.user.name, userName: req.user.name, token : token ,condition:false,myusers: req.session.ListOfUsers });
 
 
 
@@ -57,7 +56,6 @@ router.get('/', ensureAuthenticated, function(req, res){
 	console.log('\nSession ID : '+sess.id);
 	console.log('\nUser ID : '+req.user.id);
 	// console.log(packet);
-
 });
 
 router.post('/', function (req,res) {
