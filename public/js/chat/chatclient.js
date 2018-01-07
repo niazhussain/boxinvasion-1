@@ -60,37 +60,61 @@ $( document ).ready(function() {
     setInterval(function(){updateTimeAgo()}, 5000);
     //updateTimeAgo();
     user=$("#user").val();
-   /* socket.emit('newuser',{
-        onlineuser:user
-    });*/
+
+        //invite
+        socket.emit('newuser',{
+            user:user
+        });
+        //invite
     socket.on('newuser', function(data){
         if(data.user===$("#user").val())
         {
-            var onlineUser = document.getElementById("onlineuser");
-            docFragment = document.createDocumentFragment();
-            var li = document.createElement("li");
-            // emojiElement.src = "../images/emoji/" + i + ".gif";
-            li.text = data.onlineuser;
-            li.id=data.onlineuser;
-            docFragment.appendChild(li);
-            onlineUser.appendChild(docFragment);
-            // document.getElementById("typingMessage").innerHTML="";
+               let uList = ['user1', 'user2', 'user3'];
+                uList.forEach(function(browser) {
+                        element  = document.getElementById('onlineuser')
+                        let frag = document.createDocumentFragment();
+                        let row = frag.appendChild(document.createElement('tr'));
+                        row.className="info";
+                        let col1 = row.appendChild(document.createElement('td'));
+                        let col2 = row.appendChild(document.createElement('td'));
+                        col1.innerHTML = browser;
+                        col2.innerHTML = '<p align="right"> <button  class=" btn btn-info btn-sm" type="button"> Challenge </button> </p>';
+                    element.appendChild(frag);
+                });
+                console.log("new user on");
         }
         else
         {
-            var onlineUser = document.getElementById("onlineuser");
-            docFragment = document.createDocumentFragment();
-            var li = document.createElement("li");
-            // emojiElement.src = "../images/emoji/" + i + ".gif";
-            li.text = data.onlineuser;
-            li.id=data.onlineuser;
-            docFragment.appendChild(li);
-            onlineUser.appendChild(docFragment);
-            // document.getElementById("typingMessage").innerHTML="";
+              /*  var element  = document.getElementById('onlineuser'); // assuming ul exists
+                var fragment = document.createDocumentFragment();
+                var browsers = ['Firefox', 'Chrome', 'Opera',
+                    'Safari', 'Internet Explorer'];
+
+                browsers.forEach(function(browser) {
+                    var li = document.createElement('li');
+                    li.textContent = browser;
+                    li.id=browser;
+                    fragment.appendChild(li);
+                });
+
+                element.appendChild(fragment);*/
+                console.log("new user other side");
         }
-        console.log("new user on");
 
     });
+        ///invite
+        $( "#inviteuser" ).click(function() {
+            var inviteusername=$("#inviteusername").val().replace(/\s/g, '');
+            console.log("Client JS: "+inviteusername)
+            socket.emit('invitegame', {
+                myToken: $("#token").val(),
+                otherToken:$("#inviteuser").val()
+            });
+            /*socket.on('playgame', function(){
+             $("#box-invasion-chat-div").fadeIn();
+             });*/
+        });
+        //////chat///////
     $( "#send" ).click(function() {
         var nullMessage=message.value.replace(/\s/g, '');
         if(nullMessage!== "")
