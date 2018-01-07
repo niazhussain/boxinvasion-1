@@ -121,6 +121,7 @@ io.on('connection', (socket)=>{
       // socket.broadcastActiveUsers();
       console.log('disconnected');
   });
+  
 });
 
 //********************************************************//

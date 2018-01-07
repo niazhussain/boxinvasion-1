@@ -33,3 +33,21 @@ module.exports.handleConnection = function (token, socketid, callback) {
 		   	}
 	});
 }
+
+module.exports.handleDisconnect = function (token, socketid, callback) {
+
+	var id = jwt.decode(token);
+	
+	Active.deleteByID(id, function (err, active) {
+		if(err) throw err;
+		console.log('deleteby ID was ran');
+	});
+};
+
+module.exports.broadcastActiveUsers = function () {
+
+};
+
+module.exports.handleInvites = function () {
+
+}
