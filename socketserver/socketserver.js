@@ -16,7 +16,6 @@ module.exports.handleConnection = function (token, socketid, callback) {
             isPlaying :false,
             username : user.username
         });
-        console.log("name is " + newActive.username);
     });
 
     Active.getUserByID(id, function (err, active) {
@@ -35,9 +34,12 @@ module.exports.handleConnection = function (token, socketid, callback) {
                 if(err) throw err;
                 //console.log(user);
             });
-            console.log('user updated');
+            
         }
+
     });
+    return Promise.resolve();
+    
 }
 
 module.exports.handleDisconnect = function (token, socketid, callback) {
@@ -48,35 +50,17 @@ module.exports.handleDisconnect = function (token, socketid, callback) {
         if(err) throw err;
         console.log('deleteby ID was ran');
     });
+
 };
 
 module.exports.broadcastActiveUsers = function () {
-	var ListUsers=[];
-    User.find('actives', {}, function (err, ListOfUsers) {
-for (var i=0;i<ListOfUsers.length;i++)
-        console.log(ListOfUsers[i].username+" online user")
-        if(err) throw err;
+	console.log('FUNCTION CALLED');
+	Active.getAllActive(function (err, actives){
+		if (err) throw err;
+		console.log('list of all active users :');
+		console.log(JSON.stringify(actives, undefined, 4 ));
 	});
-<<<<<<< HEAD
 }
-
-module.exports.handleDisconnect = function (token, socketid, callback) {
-
-	var id = jwt.decode(token);
-	
-	Active.deleteByID(id, function (err, active) {
-		if(err) throw err;
-		console.log('deleteby ID was ran');
-	});
-};
-
-module.exports.broadcastActiveUsers = function () {
-
-=======
-    for (v of ListUsers)
-		console.log(v.userid);
->>>>>>> d285400f041578f608305343ae8c0067e76a3ecd
-};
 
 module.exports.handleInvites = function () {
 

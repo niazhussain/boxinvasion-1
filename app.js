@@ -17,9 +17,10 @@ var mongoose = require('mongoose');
 var socket = require('socket.io');
 var CircularJSON = require('circular-json');
 
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/loginapp');
 var db = mongoose.connection;
-//mongoose.Promise=global.Promise;
+
 //var db = mongoose.createConnection('mongodb://localhost/loginapp');
 
 var socketserver = require('./socketserver/socketserver');
@@ -98,33 +99,32 @@ var server = app.listen(app.get('port'), function(){
 
 //*************************SOCKET***************************//
 var io = socket(server);
-
+var x;
 //Socket Middleware to handle every socket connection and request
 io.use((socket, next) => {
-  // console.log('\nMade a new connection \n '+socket.id);
-  // console.log('with Token : '+CircularJSON.stringify(socket.handshake.query.token));
-  // console.log('from user : '+jwt.decode(socket.handshake.query.token));
-  // console.log('_________________________________');
 
+  console.log('\n********************************');
+  console.log('Incoming socket ID is : '+socket.id);
   socketserver.handleConnection(socket.handshake.query.token, socket.id, function(err){
       if(err) throw err;
-      //console.log(user);
   });
-  // socket.broadcastActiveUsers();
-  console.log('socket ID is : '+socket.id);
+ 
+  setTimeout(socketserver.broadcastActiveUsers, 1800);
 
+  // x = socketserver.broadcastActiveUsers();
+  // console.log('list of all active users :');
+  // console.log(JSON.stringify(x, undefined, 4 ));
   next();
 });
 
 
 
 io.on('connection', (socket)=>{
-    socket.on('newuser', function (data) {
 
-
-        console.log("client id: "+ socket.id);
-           socket.broadcast.emit('newuser', data);
-   });
+  socket.on('newuser', function (data) {
+      console.log("client id: "+ socket.id);
+      socket.broadcast.emit('newuser', data);
+  });
           // io.engine.generateId = (req) => {
           //   return req.user.id // custom id must be unique
           // } 
@@ -158,11 +158,12 @@ io.on('connection', (socket)=>{
         if(err) throw err;
       });
 
-
-      // socket.broadcastActiveUsers();
       console.log('disconnected');
+      // console.log('broadcast is calling DISCONNECT');
+      setTimeout(socketserver.broadcastActiveUsers, 1800);
+      
   });
-  
+
 });
 
 //********************************************************//

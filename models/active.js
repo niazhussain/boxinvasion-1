@@ -56,3 +56,8 @@ module.exports.deleteByID = function(id, callback){
 		}
 	});
 }
+
+module.exports.getAllActive = function (callback) {
+
+	Active.find({}, callback);
+}
