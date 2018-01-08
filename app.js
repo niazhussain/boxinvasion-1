@@ -157,19 +157,20 @@ io.use((socket, next) => {
 
 io.on('connection', (socket)=>{
 
-  socket.on('newuser', function (data) {
-      console.log("client id: "+ socket.id);
-          io.sockets.emit('newuser', data);
-  });
-    socket.on('userLogout', function (data) {
-        console.log("user logout client id: "+ socket.id);
-        socket.broadcast.emit('userLogout', data);
-    });
+        socket.on('newuser', function (data) {
+            console.log("client id: "+ socket.id);
+                io.sockets.emit('newuser', data);
+        });
+        socket.on('userLogout', function (data) {
+            console.log("user logout client id: "+ socket.id);
+            socket.broadcast.emit('userLogout', data);
+        });
+        
     // chat data by Niaz Hussain
-       socket.on('chat', function (data) {
+        socket.on('chat', function (data) {
           console.log("client id: "+ socket.id);
           io.sockets.emit('chat', data);
-  });
+        });
 
     // Niaz Hussain :when user is typing ,show typing message to all connected user
         socket.on('typing', function (data){
@@ -191,19 +192,17 @@ io.on('connection', (socket)=>{
 
       });
 
-  socket.on('disconnect', function () {
-      socketserver.handleDisconnect(socket.handshake.query.token, socket.id, function(err){
-        if(err) throw err;
-          
+      socket.on('disconnect', function () {
+          socketserver.handleDisconnect(socket.handshake.query.token, socket.id, function(err){
+              if(err) throw err;
+                
+          });
+
+          setTimeout(doIt, 600);
+          console.log('disconnected');
+          // console.log('broadcast is calling DISCONNECT');
+          //setTimeout(socketserver.broadcastActiveUsers, 1800);
       });
-
-      setTimeout(doIt, 600);
-      console.log('disconnected');
-      // console.log('broadcast is calling DISCONNECT');
-      //setTimeout(socketserver.broadcastActiveUsers, 1800);
-
-      
-  });
 
     function doIt(){
         var MongoClient = require('mongodb').MongoClient;
