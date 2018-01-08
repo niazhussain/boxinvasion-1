@@ -28,7 +28,7 @@ socket.on('newuser', function(data){
             let col1 = row.appendChild(document.createElement('td'));
             let col2 = row.appendChild(document.createElement('td'));
             col1.innerHTML = data.activeUlist[i].username;
-            col2.innerHTML = '<p align="right"> <button  onclick="sendInvite(this)" socketid="' + data.activeUlist[i].socketid + '" id="' + data.activeUlist[i].userid + '"  class=" btn btn-info btn-sm" type="button"> Challenge </button> </p>';
+            col2.innerHTML = '<p align="right"> <button  onclick="inviteSend(this)" socketid="' + data.activeUlist[i].socketid + '" id="' + data.activeUlist[i].userid + '"  class=" btn btn-info btn-sm" type="button"> Challenge </button> </p>';
             element.appendChild(frag);
 
             console.log("new user on");
@@ -42,15 +42,14 @@ socket.on('newuser', function(data){
 
 });
 
-function  sendInvite(curr) {
-      socket.emit('invitegame', {
-        id: curr.id
+function  inviteSend(userId) {
+      socket.emit('inviteSend', {
+        id: userId.id
     });
 }
 //show live user
 socket.on('userLogout', function(data){
     console.log(" called on disconnect");
-    alert("Hi ");
     var ele=document.getElementById("onlineuser");
     while (ele.firstChild) {
         ele.removeChild(ele.firstChild);
