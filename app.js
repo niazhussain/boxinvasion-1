@@ -156,6 +156,7 @@ io.use((socket, next) => {
 });
 
 io.on('connection', (socket)=>{
+
   socket.on('newuser', function (data) {
       console.log("client id: "+ socket.id);
           io.sockets.emit('newuser', data);
@@ -169,25 +170,26 @@ io.on('connection', (socket)=>{
           console.log("client id: "+ socket.id);
           io.sockets.emit('chat', data);
   });
+
     // Niaz Hussain :when user is typing ,show typing message to all connected user
-      socket.on('typing', function (data){
-         socket.broadcast.emit('typing', data);
+        socket.on('typing', function (data){
+           socket.broadcast.emit('typing', data);
+        });
+      // Niaz Hussain :
+        socket.on('not typing', function (data){
+            socket.broadcast.emit('not typing',data);
+        });
+      // Niaz Hussain :
+      socket.on('thinking', function (data){
+          socket.broadcast.emit('thinking',data);
       });
-    // Niaz Hussain :
-      socket.on('not typing', function (data){
-          socket.broadcast.emit('not typing',data);
+
+
+      //Handle Invite requests
+      soscket.on('invite', function(data){
+        console.log('new invite');
+
       });
-    // Niaz Hussain :
-    socket.on('thinking', function (data){
-        socket.broadcast.emit('thinking',data);
-    });
-//       socket.on('invite', function(data) {
-
-//       });
-
-//       socket.on('game', function(data) {
-
-//       });
 
   socket.on('disconnect', function () {
       socketserver.handleDisconnect(socket.handshake.query.token, socket.id, function(err){
