@@ -3,13 +3,11 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 
 var User = require('../models/user');
-
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res){
 
 	var name = req.user.name ;
 	var token = jwt.sign(req.user.id, 'secret');
-
 	res.render('index', {title: req.user.name, userName: req.user.name, token : token ,condition:false});
 	
 	var sess = req.session;

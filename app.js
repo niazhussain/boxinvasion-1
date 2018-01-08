@@ -107,10 +107,29 @@ io.use((socket, next) => {
   console.log('Incoming socket ID is : '+socket.id);
   socketserver.handleConnection(socket.handshake.query.token, socket.id, function(err){
       if(err) throw err;
-  });
- 
-  setTimeout(socketserver.broadcastActiveUsers, 1800);
 
+
+  });
+  //setTimeout(socketserver.broadcastActiveUsers, 1800);
+    setTimeout(testIt, 600);
+function testIt(){
+    var MongoClient = require('mongodb').MongoClient;
+    var url = "mongodb://localhost:27017/loginapp";
+ 
+    MongoClient.connect(url, function(err, db) {
+        console.log("heheheheheheheeheheh :" );
+        if (err) throw err;
+        db.collection("actives").find({}).toArray(function(err, result) {
+            if (err) throw err;
+
+            db.close();
+            socket.emit('newuser',{
+                activeUlist:result
+
+            });
+        });
+    });
+    }
   // x = socketserver.broadcastActiveUsers();
   // console.log('list of all active users :');
   // console.log(JSON.stringify(x, undefined, 4 ));
@@ -120,10 +139,20 @@ io.use((socket, next) => {
 
 
 io.on('connection', (socket)=>{
-
+socket.join(socket.id);
   socket.on('newuser', function (data) {
       console.log("client id: "+ socket.id);
-      socket.broadcast.emit('newuser', data);
+      io.broadcast.emit('newuser', data);
+  });
+    socket.on('userLogout', function (data) {
+        console.log("user logout client id: "+ socket.id);
+        socket.broadcast.emit('userLogout', data);
+    });
+    // chat data
+       socket.on('chat', function (data) {
+
+          console.log("client id: "+ socket.id);
+          io.sockets.emit('chat', data);
   });
           // io.engine.generateId = (req) => {
           //   return req.user.id // custom id must be unique
@@ -156,14 +185,33 @@ io.on('connection', (socket)=>{
   socket.on('disconnect', function () {
       socketserver.handleDisconnect(socket.handshake.query.token, socket.id, function(err){
         if(err) throw err;
+          doIt();
       });
 
       console.log('disconnected');
       // console.log('broadcast is calling DISCONNECT');
-      setTimeout(socketserver.broadcastActiveUsers, 1800);
+      //setTimeout(socketserver.broadcastActiveUsers, 1800);
+
       
   });
+    function doIt(){
+        var MongoClient = require('mongodb').MongoClient;
+        var url = "mongodb://localhost:27017/loginapp";
 
+        MongoClient.connect(url, function(err, db) {
+            console.log("heheheheheheheeheheh :" );
+            if (err) throw err;
+            db.collection("actives").find({}).toArray(function(err, result) {
+                if (err) throw err;
+
+                db.close();
+                socket.emit('userLogout',{
+                    activeUlist:result
+
+                });
+            });
+        });
+    }
 });
 
 //********************************************************//
