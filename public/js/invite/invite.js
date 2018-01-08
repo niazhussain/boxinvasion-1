@@ -58,6 +58,8 @@ socket.on('userLogout', function(data){
             var element = document.getElementById('onlineuser')
             // element.innerHTML+='<div></div><span class="input-group-addon small" style="width: inherit" id="basic-addon1">'+data.activeUlist[i].username+'</span><span class="input-group-btn "><button socketid="'+data.activeUlist[i].socketid+'"class="btn btn-primary"  id="'+data.activeUlist[i].userid+'">Send</button></span></div>';
             let frag = document.createDocumentFragment();
+
+           // let div = frag.appendChild(document.createElement('tr'));
             let row = frag.appendChild(document.createElement('tr'));
             row.className = "info";
             let col1 = row.appendChild(document.createElement('td'));
