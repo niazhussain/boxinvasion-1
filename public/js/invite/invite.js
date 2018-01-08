@@ -41,6 +41,7 @@ socket.on('newuser', function(data){
     document.getElementById("onlineuser").innerHTML = document.getElementById("onlineuser").innerHTML ;
 
 });
+
 function  sendInvite(curr) {
       socket.emit('invitegame', {
         id: curr.id

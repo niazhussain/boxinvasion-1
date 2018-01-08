@@ -186,8 +186,8 @@ io.on('connection', (socket)=>{
 
 
       //Handle Invite requests
-      soscket.on('invite', function(data){
-        console.log('new invite');
+      socket.on('invitegame', function(data){
+        console.log('invite for : '+data.id+ ' from : '+socket.id);
 
       });
 
