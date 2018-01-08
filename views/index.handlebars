@@ -35,7 +35,10 @@
     <div class="row chat-window col-xs-4 col-md-4" id="chat_window" style="margin-left:-50px;">
         <!--<div class="col-xs-12 col-md-12">-->
         <div class="panel">
-            <div class="list-users">
+            <div id ="temponlineuser " class="input-group" style="margin-bottom:0px">
+
+            </div>
+            <div class="list-users"  style=" overflow-y: scroll;max-height:100px;">
                 <table class="table">
                     <tbody id="onlineuser">
 
@@ -43,8 +46,6 @@
                 </table>
 
             </div>
-
-
         <div  id="box-invasion-chat-div" class=" panel-primary">
             <h2 class="panel-heading">Discussion</h2>
             <div id="box-invasion-chat-win" style="margin-bottom: 0px" class="">
@@ -75,6 +76,7 @@
     </div>
     
     <script src="/js/socket/socketclient.js"><{{!}}/script>
+    <script src="/js/invite/invite.js"><{{!}}/script>
     <script src="/js/chat/chatclient.js"><{{!}}/script>
     <script src="/js/game/gameclient.js"><{{!}}/script>
 

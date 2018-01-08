@@ -62,11 +62,10 @@ $( document ).ready(function() {
     user=$("#user").val();
 
         //invite
-        socket.emit('newuser',{
-            user:user
-        });
+
         //invite
-    socket.on('newuser', function(data){
+    socket.on('tempnewuser', function(data){
+        console.log("data from server :"+data.user);
         if(data.user===$("#user").val())
         {
                let uList = ['user1', 'user2', 'user3'];
