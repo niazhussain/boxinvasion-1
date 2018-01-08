@@ -103,53 +103,56 @@ var x;
 var cleanDB=true;
 //Socket Middleware to handle every socket connection and request
 io.use((socket, next) => {
-if(cleanDB)
-{
-    cleanDB=false;
-    var MongoClient = require('mongodb').MongoClient;
-    var url = "mongodb://localhost:27017/loginapp";
+          if(cleanDB)
+          {
+              cleanDB=false;
+              var MongoClient = require('mongodb').MongoClient;
+              var url = "mongodb://localhost:27017/loginapp";
 
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        db.collection("actives").remove({},function(err) {
+              MongoClient.connect(url, function(err, db) {
+                  if (err) throw err;
+                  db.collection("actives").remove({},function(err) {
+                      if (err) throw err;
+
+                      db.close();
+
+                  });
+              });
+          }
+
+          console.log('\n********************************');
+          console.log('Incoming socket ID is : '+socket.id);
+          socketserver.handleConnection(socket.handshake.query.token, socket.id, function(err){
+              if(err) throw err;
+
+
+          });
+          //setTimeout(socketserver.broadcastActiveUsers, 1800);
+          setTimeout(testIt, 600);
+  
+      function testIt(){
+        var MongoClient = require('mongodb').MongoClient;
+        var url = "mongodb://localhost:27017/loginapp";
+     
+        MongoClient.connect(url, function(err, db) {
+            console.log("heheheheheheheeheheh :" );
             if (err) throw err;
+            db.collection("actives").find({}).toArray(function(err, result) {
+                if (err) throw err;
 
-            db.close();
+                db.close();
+                io.sockets.emit('newuser',{
+                    activeUlist:result
 
-        });
-    });
-}
-  console.log('\n********************************');
-  console.log('Incoming socket ID is : '+socket.id);
-  socketserver.handleConnection(socket.handshake.query.token, socket.id, function(err){
-      if(err) throw err;
-
-
-  });
-  //setTimeout(socketserver.broadcastActiveUsers, 1800);
-    setTimeout(testIt, 600);
-function testIt(){
-    var MongoClient = require('mongodb').MongoClient;
-    var url = "mongodb://localhost:27017/loginapp";
- 
-    MongoClient.connect(url, function(err, db) {
-        console.log("heheheheheheheeheheh :" );
-        if (err) throw err;
-        db.collection("actives").find({}).toArray(function(err, result) {
-            if (err) throw err;
-
-            db.close();
-            socket.emit('newuser',{
-                activeUlist:result
-
+                });
             });
         });
-    });
-    }
+      }
   // x = socketserver.broadcastActiveUsers();
   // console.log('list of all active users :');
   // console.log(JSON.stringify(x, undefined, 4 ));
   next();
+
 });
 
 io.on('connection', (socket)=>{
@@ -189,15 +192,17 @@ io.on('connection', (socket)=>{
   socket.on('disconnect', function () {
       socketserver.handleDisconnect(socket.handshake.query.token, socket.id, function(err){
         if(err) throw err;
-          doIt();
+          
       });
 
+      setTimeout(doIt, 600);
       console.log('disconnected');
       // console.log('broadcast is calling DISCONNECT');
       //setTimeout(socketserver.broadcastActiveUsers, 1800);
 
       
   });
+
     function doIt(){
         var MongoClient = require('mongodb').MongoClient;
         var url = "mongodb://localhost:27017/loginapp";
@@ -209,13 +214,13 @@ io.on('connection', (socket)=>{
                 if (err) throw err;
 
                 db.close();
-                socket.emit('userLogout',{
+                io.sockets.emit('userLogout',{
                     activeUlist:result
 
                 });
             });
         });
-    }
+    };
 });
 
 //********************************************************//
