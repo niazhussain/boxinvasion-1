@@ -28,7 +28,7 @@ socket.on('newuser', function(data){
             let col1 = row.appendChild(document.createElement('td'));
             let col2 = row.appendChild(document.createElement('td'));
             col1.innerHTML = data.activeUlist[i].username;
-            col2.innerHTML = '<p align="right"> <button socketid="' + data.activeUlist[i].socketid + '" id="' + data.activeUlist[i].userid + '"  class=" btn btn-info btn-sm" type="button"> Challenge </button> </p>';
+            col2.innerHTML = '<p align="right"> <button  onclick="sendInvite(this)" socketid="' + data.activeUlist[i].socketid + '" id="' + data.activeUlist[i].userid + '"  class=" btn btn-info btn-sm" type="button"> Challenge </button> </p>';
             element.appendChild(frag);
 
             console.log("new user on");
@@ -41,6 +41,11 @@ socket.on('newuser', function(data){
     document.getElementById("onlineuser").innerHTML = document.getElementById("onlineuser").innerHTML ;
 
 });
+function  sendInvite(curr) {
+      socket.emit('invitegame', {
+        id: curr.id
+    });
+}
 //show live user
 socket.on('userLogout', function(data){
     console.log(" called on disconnect");
