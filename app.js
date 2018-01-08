@@ -24,6 +24,7 @@ var db = mongoose.connection;
 //var db = mongoose.createConnection('mongodb://localhost/loginapp');
 
 var socketserver = require('./socketserver/socketserver');
+var Active = require('./models/active');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -96,41 +97,12 @@ var server = app.listen(app.get('port'), function(){
     console.log('Server started on port '+app.get('port'));
 });
 
+Active.remove({},()=>{
+  console.log('active cleared');
+});
 
-//*************************SOCKET***************************//
-var io = socket(server);
-var x;
-var cleanDB=true;
-//Socket Middleware to handle every socket connection and request
-io.use((socket, next) => {
-          if(cleanDB)
-          {
-              cleanDB=false;
-              var MongoClient = require('mongodb').MongoClient;
-              var url = "mongodb://localhost:27017/loginapp";
-
-              MongoClient.connect(url, function(err, db) {
-                  if (err) throw err;
-                  db.collection("actives").remove({},function(err) {
-                      if (err) throw err;
-
-                      db.close();
-
-                  });
-              });
-          }
-
-          console.log('\n********************************');
-          console.log('Incoming socket ID is : '+socket.id);
-          socketserver.handleConnection(socket.handshake.query.token, socket.id, function(err){
-              if(err) throw err;
-
-
-          });
-          //setTimeout(socketserver.broadcastActiveUsers, 1800);
-          setTimeout(testIt, 600);
-  
-      function testIt(){
+//************************************************************//
+function getUser(){
         var MongoClient = require('mongodb').MongoClient;
         var url = "mongodb://localhost:27017/loginapp";
      
@@ -148,6 +120,45 @@ io.use((socket, next) => {
             });
         });
       }
+
+function sendInvite(query){
+  console.log('query :'+ query);
+
+        var MongoClient = require('mongodb').MongoClient;
+        var url = "mongodb://localhost:27017/loginapp";
+
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            
+            Active.getUserByID(query, function(err, result) {
+                if (err) throw err;
+
+                console.log(JSON.stringify(result, undefined , 4));
+                io.to(result.socketid).emit( 'inviteReceive', {user : result});
+            });
+
+        });
+};
+
+
+//*************************SOCKET***************************//
+var io = socket(server);
+var x;
+
+//Socket Middleware to handle every socket connection and request
+io.use((socket, next) => {
+
+          console.log('\n********************************');
+          console.log('Incoming socket ID is : '+socket.id);
+          socketserver.handleConnection(socket.handshake.query.token, socket.id, function(err){
+              if(err) throw err;
+
+
+          });
+          //setTimeout(socketserver.broadcastActiveUsers, 1800);
+          setTimeout(getUser, 600);
+  
+      
   // x = socketserver.broadcastActiveUsers();
   // console.log('list of all active users :');
   // console.log(JSON.stringify(x, undefined, 4 ));
@@ -190,6 +201,11 @@ io.on('connection', (socket)=>{
       socket.on('inviteSend', function(data){
         console.log('invite for : '+data.id+ ' from : '+socket.id);
 
+        //TO active table - id socket - receiver ID
+        //FROM token decode - from ID
+        sendInvite(data.id);
+
+
       });
 
       socket.on('disconnect', function () {
@@ -198,29 +214,13 @@ io.on('connection', (socket)=>{
                 
           });
 
-          setTimeout(doIt, 600);
+          setTimeout(getUser, 600);
           console.log('disconnected');
           // console.log('broadcast is calling DISCONNECT');
           //setTimeout(socketserver.broadcastActiveUsers, 1800);
       });
 
-    function doIt(){
-        var MongoClient = require('mongodb').MongoClient;
-        var url = "mongodb://localhost:27017/loginapp";
 
-        MongoClient.connect(url, function(err, db) {
-            if (err) throw err;
-            db.collection("actives").find({}).toArray(function(err, result) {
-                if (err) throw err;
-
-                db.close();
-                io.sockets.emit('userLogout',{
-                    activeUlist:result
-
-                });
-            });
-        });
-    };
 });
 
 //********************************************************//
