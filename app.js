@@ -187,7 +187,7 @@ io.on('connection', (socket)=>{
 
 
       //Handle Invite requests
-      socket.on('invitegame', function(data){
+      socket.on('inviteSend', function(data){
         console.log('invite for : '+data.id+ ' from : '+socket.id);
 
       });
@@ -209,7 +209,6 @@ io.on('connection', (socket)=>{
         var url = "mongodb://localhost:27017/loginapp";
 
         MongoClient.connect(url, function(err, db) {
-            console.log("heheheheheheheeheheh :" );
             if (err) throw err;
             db.collection("actives").find({}).toArray(function(err, result) {
                 if (err) throw err;
