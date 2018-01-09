@@ -25,6 +25,7 @@ var db = mongoose.connection;
 
 var socketserver = require('./socketserver/socketserver');
 var Active = require('./models/active');
+var Game = require('./models/game');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -97,8 +98,14 @@ var server = app.listen(app.get('port'), function(){
     console.log('Server started on port '+app.get('port'));
 });
 
+//Clear Active
 Active.remove({},()=>{
     console.log('active cleared');
+});
+
+//Clear Game Collection
+Game.clearTable(()=>{
+    console.log('Game Collection cleared on server start');
 });
 
 //************************************************************//
@@ -121,26 +128,19 @@ function sendInvite(data){
 
     var requestFromId=jwt.decode(data.myToken);
     var requestFromUser=data.myUser;
-    var MongoClient = require('mongodb').MongoClient;
-    var url = "mongodb://localhost:27017/loginapp";
-
-    MongoClient.connect(url, function(err, db) {
+    Active.getUserByID(query, function(err, result) {
         if (err) throw err;
 
-        Active.getUserByID(query, function(err, result) {
-            if (err) throw err;
-
-            console.log(JSON.stringify(result, undefined , 4));
-            io.to(result.socketid).emit( 'inviteReceive', {
-                userid : result.userid,
-                socketid:result.socketid,
-                username:result.username,
-                requestFromId:requestFromId,
-                requestFromUser:requestFromUser
-            });
+        console.log(JSON.stringify(result, undefined , 4));
+        io.to(result.socketid).emit( 'inviteReceive', {
+            userid : result.userid,
+            socketid:result.socketid,
+            username:result.username,
+            requestFromId:requestFromId,
+            requestFromUser:requestFromUser
         });
-
     });
+
 };
 function inviteAccepted(data){
     Active.getUserByID(data.acceptedToId, function(err, result) {
@@ -201,29 +201,85 @@ io.on('connection', (socket)=>{
 
     // chat data by Niaz Hussain
     socket.on('chat', function (data) {
-        /*console.log("client id: "+ socket.id);
-          Active.getUserByID("5a285d2eed8e730d4c46b83b", function(err, acceptedToUser) {
-              if (err) throw err;
-              Active.getUserByID("5a41128037a8042a8cf1fc72", function(err, acceptedByUser) {
-                  if (err) throw err;
-                  //console.log(JSON.stringify(acceptedByUser, undefined , 4));
-                 io.to(acceptedByUser.socketid).to(acceptedToUser.socketid).emit('chat', data);
-              });
-          });*/
-        io.sockets.emit('chat', data);
+        //data contains both users ids as  acceptedToId, acceptedById
+        Game.find({}, function(err, game) {
+            if (err) throw err;
+            if(game.length)
+            {
+                Active.getUserByID(game[0].acceptedToId, function(err, acceptedToUser) {
+                    if (err) throw err;
+                    Active.getUserByID(game[0].acceptedById, function(err, acceptedByUser) {
+                        if (err) throw err;
+                        while(acceptedByUser.socketid == "undefined" && acceptedToUser.socketid == "undefined")
+                        {
+                        }
+                        console.log("second chat received...")
+                        io.to(acceptedByUser.socketid).to(acceptedToUser.socketid).emit('chat', data);
+                    });
+                });
+            }
+        });
     });
 
     // Niaz Hussain :when user is typing ,show typing message to all connected user
     socket.on('typing', function (data){
-        socket.broadcast.emit('typing', data);
+        Game.find({}, function(err, game) {
+            if (err) throw err;
+            if(game.length)
+            {
+                Active.getUserByID(game[0].acceptedToId, function(err, acceptedToUser) {
+                    if (err) throw err;
+                    Active.getUserByID(game[0].acceptedById, function(err, acceptedByUser) {
+                        if (err) throw err;
+                        while(acceptedByUser.socketid == "undefined" && acceptedToUser.socketid == "undefined")
+                        {
+                        }
+                        console.log("second chat received...")
+                        io.to(acceptedByUser.socketid).to(acceptedToUser.socketid).emit('typing', data);
+                    });
+                });
+            }
+        });
     });
     // Niaz Hussain :
     socket.on('not typing', function (data){
-        socket.broadcast.emit('not typing',data);
+        Game.find({}, function(err, game) {
+            if (err) throw err;
+            if(game.length)
+            {
+                Active.getUserByID(game[0].acceptedToId, function(err, acceptedToUser) {
+                    if (err) throw err;
+                    Active.getUserByID(game[0].acceptedById, function(err, acceptedByUser) {
+                        if (err) throw err;
+                        while(acceptedByUser.socketid == "undefined" && acceptedToUser.socketid == "undefined")
+                        {
+                        }
+                        console.log("second chat received...")
+                        io.to(acceptedByUser.socketid).to(acceptedToUser.socketid).emit('not typing', data);
+                    });
+                });
+            }
+        });
     });
     // Niaz Hussain :
     socket.on('thinking', function (data){
-        socket.broadcast.emit('thinking',data);
+        Game.find({}, function(err, game) {
+            if (err) throw err;
+            if(game.length)
+            {
+                Active.getUserByID(game[0].acceptedToId, function(err, acceptedToUser) {
+                    if (err) throw err;
+                    Active.getUserByID(game[0].acceptedById, function(err, acceptedByUser) {
+                        if (err) throw err;
+                        while(acceptedByUser.socketid == "undefined" && acceptedToUser.socketid == "undefined")
+                        {
+                        }
+                        console.log("second chat received...")
+                        io.to(acceptedByUser.socketid).to(acceptedToUser.socketid).emit('thinking', data);
+                    });
+                });
+            }
+        });
     });
     //Handle Invite requests
     socket.on('inviteSend', function(data){
@@ -245,26 +301,42 @@ io.on('connection', (socket)=>{
     });
     //Play game
     socket.on('playgame',function (data) {
-        //data contains both users ids as  acceptedToId, acceptedById
-        Active.getUserByID(data.acceptedToId, function(err, acceptedToUser) {
-            if (err) throw err;
-            Active.getUserByID(data.acceptedById, function(err, acceptedByUser) {
-                if (err) throw err;
-                //console.log(JSON.stringify(acceptedByUser, undefined , 4));
-                /* setTimeout(function playGame(acceptedByUser,acceptedToUser,data){
-                     console.log("play timeout");
-                     io.to(acceptedByUser.socketid).to(acceptedToUser.socketid).emit('playgame', data);
-                     }, 500);*/
-                while(acceptedByUser.socketid == "undefined" && acceptedToUser.socketid == "undefined")
-                {
-                }
-                data.acceptedByUserName=acceptedByUser.username;
-                data.acceptedToUserName=acceptedToUser.username;
-                io.to(acceptedByUser.socketid).to(acceptedToUser.socketid).emit('playgame', data);
-                console.log("going");
-            });
+
+        game = new Game ({
+            acceptedById : data.acceptedById ,
+            acceptedToId : data.acceptedToId
         });
-        //console.log(" PlayGame "+JSON.stringify(acceptedByUser, undefined , 4));
+        Game.clearTable( (err) => {
+            if (err) throw err;
+            console.log('game created'+JSON.stringify(game,undefined, 4));
+
+        });
+        Game.createGame(game, (err) => {
+            if (err) throw err;
+            console.log('game created'+JSON.stringify(game,undefined, 4));
+
+        });
+
+        //data contains both users ids as  acceptedToId, acceptedById
+        Game.find({}, function(err, game) {
+            if (err) throw err;
+            if(game.length)
+            {
+                Active.getUserByID(game[0].acceptedToId, function(err, acceptedToUser) {
+                    if (err) throw err;
+                    Active.getUserByID(game[0].acceptedById, function(err, acceptedByUser) {
+                        if (err) throw err;
+                        while(acceptedByUser.socketid == "undefined" && acceptedToUser.socketid == "undefined")
+                        {
+                        }
+                        data.acceptedByUserName=acceptedByUser.username;
+                        data.acceptedToUserName=acceptedToUser.username;
+                        io.to(acceptedByUser.socketid).to(acceptedToUser.socketid).emit('playgame', data);
+                    });
+                });
+            }
+        });
+        //////////////////////////////////////////////
     });
     socket.on('disconnect', function () {
         socketserver.handleDisconnect(socket.handshake.query.token, socket.id, function(err){
@@ -278,9 +350,24 @@ io.on('connection', (socket)=>{
     });
 ///////////////////////// multiplayer gameobject /////////////
     socket.on('SendMove', function (data) {
-        console.log("data sending: " + data.username);
-        io.sockets.emit('SendMove', data);
-        console.log("sent");
+        Game.find({}, function(err, game) {
+            if (err) throw err;
+            if(game.length)
+            {
+                Active.getUserByID(game[0].acceptedToId, function(err, acceptedToUser) {
+                    if (err) throw err;
+                    Active.getUserByID(game[0].acceptedById, function(err, acceptedByUser) {
+                        if (err) throw err;
+                        while(acceptedByUser.socketid == "undefined" && acceptedToUser.socketid == "undefined")
+                        {
+                        }
+                        data.acceptedByUserName=acceptedByUser.username;
+                        data.acceptedToUserName=acceptedToUser.username;
+                        io.to(acceptedByUser.socketid).emit('SendMove', data);
+                    });
+                });
+            }
+        });
     });
 });
 
