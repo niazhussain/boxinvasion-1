@@ -7,7 +7,7 @@ socket.on('SendMove', function(data) {
 
 socket.on('playgame' , function (data) {
 
-    alert("aya");
+    //alert("aya");
     player1Name = data.acceptedToUserName;
     player2Name = data.acceptedByUserName;
     OtherPlayerName = data.acceptedByUserName;
