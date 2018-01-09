@@ -7,6 +7,7 @@ socket.on('SendMove', function(data) {
 
 socket.on('playgame' , function (data) {
 
+    alert("aya");
     player1Name = data.acceptedToUserName;
     player2Name = data.acceptedByUserName;
     OtherPlayerName = data.acceptedByUserName;
@@ -156,9 +157,10 @@ function getPositionForMultiPlayer(event)
     //alert(ValidMoveBool);
     if(temp1 == "valid" || temp2 == "valid")
     {
-        //alert("aya");
+        var t =document.getElementById("token1").value;
         socket.emit('SendMove', {
             username : CurrentUserName,
+            Token : t,
             Xvalue : x,
             Yvalue : y,
             Updateturnstatus : TurnStatusForMultiplayer

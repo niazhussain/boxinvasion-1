@@ -306,6 +306,7 @@ io.on('connection', (socket)=>{
             acceptedById : data.acceptedById ,
             acceptedToId : data.acceptedToId
         });
+
         Game.clearTable( (err) => {
             if (err) throw err;
             console.log('game created'+JSON.stringify(game,undefined, 4));
@@ -315,16 +316,23 @@ io.on('connection', (socket)=>{
             if (err) throw err;
             console.log('game created'+JSON.stringify(game,undefined, 4));
 
-        });
+        });console.log("game length"+game.length);
 
         //data contains both users ids as  acceptedToId, acceptedById
+        console.log("ayaaaa");
         Game.find({}, function(err, game) {
             if (err) throw err;
-            if(game.length)
+            console.log("2 ayaaaa");
+            while(game.length == "undefined")
             {
-                Active.getUserByID(game[0].acceptedToId, function(err, acceptedToUser) {
+
+            }
+            // if(game.length)
+            // {
+                console.log("3 ayaaaa");
+                Active.getUserByID(data.acceptedToId, function(err, acceptedToUser) {
                     if (err) throw err;
-                    Active.getUserByID(game[0].acceptedById, function(err, acceptedByUser) {
+                    Active.getUserByID(data.acceptedById, function(err, acceptedByUser) {
                         if (err) throw err;
                         while(acceptedByUser.socketid == "undefined" && acceptedToUser.socketid == "undefined")
                         {
@@ -334,7 +342,9 @@ io.on('connection', (socket)=>{
                         io.to(acceptedByUser.socketid).to(acceptedToUser.socketid).emit('playgame', data);
                     });
                 });
-            }
+                console.log("4ayaaaa");
+          //  }
+            console.log("5 ayaaaa");
         });
         //////////////////////////////////////////////
     });
@@ -350,6 +360,7 @@ io.on('connection', (socket)=>{
     });
 ///////////////////////// multiplayer gameobject /////////////
     socket.on('SendMove', function (data) {
+        var senderid = jwt.decode(data.Token);
         Game.find({}, function(err, game) {
             if (err) throw err;
             if(game.length)
@@ -363,7 +374,15 @@ io.on('connection', (socket)=>{
                         }
                         data.acceptedByUserName=acceptedByUser.username;
                         data.acceptedToUserName=acceptedToUser.username;
-                        io.to(acceptedByUser.socketid).emit('SendMove', data);
+                        console.log("game[0].acceptedToId "+game[0].acceptedToId );
+                        console.log("game[0].send == senderid "+ senderid);
+                        if(game[0].acceptedToId == senderid)
+                            io.to(acceptedByUser.socketid).emit('SendMove', data);
+                        else if(game[0].acceptedById == senderid)
+                            io.to(acceptedToUser.socketid).emit('SendMove', data);
+                        else
+                            console.log("else");
+
                     });
                 });
             }
