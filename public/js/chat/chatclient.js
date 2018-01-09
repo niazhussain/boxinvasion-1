@@ -9,7 +9,7 @@
 /*console.log("testct:"+ chatroom);
 console.log("Sokcet id of "+$(document.getElementById('user')).val()+":"+ socketId);*/
 var message = document.getElementById('message');
-//user = "{{userName}}";/*document.getElementById('user');*/
+var user = document.getElementById("user").value;
 btn = document.getElementById('send');
 messageArea = document.getElementById('messageArea');
 feedback = document.getElementById('typingMessage');
@@ -23,7 +23,7 @@ socket.on('chat', function(data){
     //selection it is me or you(other client)
     var msg= manipulateMessage(data.message);
     data.message=msg;
-    if(data.user===$("#user").val())
+    if(data.user===user)
     {
         messageByMe(altUser,data);
     }
@@ -43,6 +43,9 @@ socket.on('typing', function(data){
 socket.on('not typing', function(){
     console.log("not typing");
     document.getElementById("typingMessage").innerHTML="";
+});
+socket.on('thinking', function(data){
+    typingMessage.innerHTML = '<p><strong>' + data + '</strong> <em style="color:blue"> is thinking to write a message...</em></p>';
 });
 
 $( document ).ready(function() {
@@ -102,17 +105,17 @@ $( document ).ready(function() {
 
     });
         ///invite
-        $( "#inviteuser" ).click(function() {
+        /*$( "#inviteuser" ).click(function() {
             var inviteusername=$("#inviteusername").val().replace(/\s/g, '');
             console.log("Client JS: "+inviteusername)
             socket.emit('invitegame', {
                 myToken: $("#token").val(),
                 otherToken:$("#inviteuser").val()
             });
-            /*socket.on('playgame', function(){
+            /!*socket.on('playgame', function(){
              $("#box-invasion-chat-div").fadeIn();
+             });*!/
              });*/
-        });
         //////chat///////
     $( "#send" ).click(function() {
         var nullMessage=message.value.replace(/\s/g, '');
@@ -148,7 +151,10 @@ $( document ).ready(function() {
         socket.emit('typing', user);
     });
     $( "#message" ).focusout(function() {
-        socket.emit('not typing');
+        socket.emit('not typing',user);
+    });
+    $( "#message" ).focusin(function() {
+        socket.emit('thinking',user);
     });
 ////////////////////////////////////////////
 //showing emoji by clicking emoji btn

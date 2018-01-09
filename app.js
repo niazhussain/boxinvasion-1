@@ -24,6 +24,7 @@ var db = mongoose.connection;
 //var db = mongoose.createConnection('mongodb://localhost/loginapp');
 
 var socketserver = require('./socketserver/socketserver');
+var Active = require('./models/active');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -57,20 +58,20 @@ app.use(passport.session());
 
 // Express Validator
 app.use(expressValidator({
-  errorFormatter: function(param, msg, value) {
-      var namespace = param.split('.')
-      , root    = namespace.shift()
-      , formParam = root;
+    errorFormatter: function(param, msg, value) {
+        var namespace = param.split('.')
+            , root    = namespace.shift()
+            , formParam = root;
 
-    while(namespace.length) {
-      formParam += '[' + namespace.shift() + ']';
+        while(namespace.length) {
+            formParam += '[' + namespace.shift() + ']';
+        }
+        return {
+            param : formParam,
+            msg   : msg,
+            value : value
+        };
     }
-    return {
-      param : formParam,
-      msg   : msg,
-      value : value
-    };
-  }
 }));
 
 // Connect Flash
@@ -78,12 +79,12 @@ app.use(flash());
 
 // Global Vars
 app.use(function (req, res, next) {
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  res.locals.error = req.flash('error');
-  res.locals.user = req.user || null;
-  //res.locals.count = req.count ;
-  next();
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    res.locals.user = req.user || null;
+    //res.locals.count = req.count ;
+    next();
 });
 
 app.use('/', routes);
@@ -96,26 +97,15 @@ var server = app.listen(app.get('port'), function(){
     console.log('Server started on port '+app.get('port'));
 });
 
+Active.remove({},()=>{
+    console.log('active cleared');
+});
 
-//*************************SOCKET***************************//
-var io = socket(server);
-var x;
-//Socket Middleware to handle every socket connection and request
-io.use((socket, next) => {
-
-  console.log('\n********************************');
-  console.log('Incoming socket ID is : '+socket.id);
-  socketserver.handleConnection(socket.handshake.query.token, socket.id, function(err){
-      if(err) throw err;
-
-
-  });
-  //setTimeout(socketserver.broadcastActiveUsers, 1800);
-    setTimeout(testIt, 600);
-function testIt(){
+//************************************************************//
+function getUser(){
     var MongoClient = require('mongodb').MongoClient;
     var url = "mongodb://localhost:27017/loginapp";
- 
+
     MongoClient.connect(url, function(err, db) {
         console.log("heheheheheheheeheheh :" );
         if (err) throw err;
@@ -123,104 +113,181 @@ function testIt(){
             if (err) throw err;
 
             db.close();
-            socket.emit('newuser',{
+            io.sockets.emit('newuser',{
                 activeUlist:result
 
             });
         });
     });
-    }
-  // x = socketserver.broadcastActiveUsers();
-  // console.log('list of all active users :');
-  // console.log(JSON.stringify(x, undefined, 4 ));
-  next();
+}
+
+function sendInvite(data){
+    console.log('query :'+ query);
+    var query=data.id;
+
+    var requestFromId=jwt.decode(data.myToken);
+    var requestFromUser=data.myUser;
+    var MongoClient = require('mongodb').MongoClient;
+    var url = "mongodb://localhost:27017/loginapp";
+
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+
+        Active.getUserByID(query, function(err, result) {
+            if (err) throw err;
+
+            console.log(JSON.stringify(result, undefined , 4));
+            io.to(result.socketid).emit( 'inviteReceive', {
+                userid : result.userid,
+                socketid:result.socketid,
+                username:result.username,
+                requestFromId:requestFromId,
+                requestFromUser:requestFromUser
+            });
+        });
+
+    });
+};
+function inviteAccepted(data){
+    Active.getUserByID(data.acceptedToId, function(err, result) {
+        if (err) throw err;
+        console.log(JSON.stringify(result, undefined , 4));
+        io.to(result.socketid).emit( 'inviteAccepted', {
+            userid : result.userid,
+            socketid:result.socketid,
+            username:result.username,
+            acceptedById:data.acceptedById,
+            acceptedByName:data.acceptedByName
+        });
+    });
+};
+function inviteRejected(data){
+    Active.getUserByID(data.rejectedToId, function(err, result) {
+        if (err) throw err;
+        console.log(JSON.stringify(result, undefined , 4));
+        io.to(result.socketid).emit( 'inviteRejected', {
+            userid : result.userid,
+            socketid:result.socketid,
+            username:result.username,
+            rejectedById:data.rejectedById,
+            rejectedByName:data.rejectedByName
+        });
+    });
+};
+//*************************SOCKET***************************//
+var io = socket(server);
+var x;
+
+//Socket Middleware to handle every socket connection and request
+io.use((socket, next) => {
+
+    console.log('\n********************************');
+    console.log('Incoming socket ID is : '+socket.id);
+    socketserver.handleConnection(socket.handshake.query.token, socket.id, function(err){
+        if(err) throw err;
+
+
+    });
+    //setTimeout(socketserver.broadcastActiveUsers, 1800);
+    setTimeout(getUser, 600);
+    next();
+
 });
 
-
-
 io.on('connection', (socket)=>{
-socket.join(socket.id);
-  socket.on('newuser', function (data) {
-      console.log("client id: "+ socket.id);
-      io.broadcast.emit('newuser', data);
-  });
+
+    socket.on('newuser', function (data) {
+        console.log("client id: "+ socket.id);
+        io.sockets.emit('newuser', data);
+    });
     socket.on('userLogout', function (data) {
         console.log("user logout client id: "+ socket.id);
         socket.broadcast.emit('userLogout', data);
     });
-    // chat data
-       socket.on('chat', function (data) {
 
-          console.log("client id: "+ socket.id);
-          io.sockets.emit('chat', data);
-  });
-          // io.engine.generateId = (req) => {
-          //   return req.user.id // custom id must be unique
-          // } 
-      
-// // when user is typing ,show typing message to all connected user
-//       socket.on('typing', function (data){
-//           socket.broadcast.emit('typing', data);
-//       });
+    // chat data by Niaz Hussain
+    socket.on('chat', function (data) {
+        /*console.log("client id: "+ socket.id);
+          Active.getUserByID("5a285d2eed8e730d4c46b83b", function(err, acceptedToUser) {
+              if (err) throw err;
+              Active.getUserByID("5a41128037a8042a8cf1fc72", function(err, acceptedByUser) {
+                  if (err) throw err;
+                  //console.log(JSON.stringify(acceptedByUser, undefined , 4));
+                 io.to(acceptedByUser.socketid).to(acceptedToUser.socketid).emit('chat', data);
+              });
+          });*/
+        io.sockets.emit('chat', data);
+    });
 
-//       socket.on('not typing', function (){
-//           socket.broadcast.emit('not typing');
-//       });
-
-//       // chat data
-//       socket.on('chat', function (data) {
-
-//           console.log("client id: "+ socket.id);
-//           io.sockets.emit('chat', data);
-//       });
-
-//       socket.on('invite', function(data) {
-
-//       });
-
-//       socket.on('game', function(data) {
-
-//       });
-
-  socket.on('disconnect', function () {
-      socketserver.handleDisconnect(socket.handshake.query.token, socket.id, function(err){
-        if(err) throw err;
-          doIt();
-      });
-
-      console.log('disconnected');
-      // console.log('broadcast is calling DISCONNECT');
-      //setTimeout(socketserver.broadcastActiveUsers, 1800);
-
-      
-  });
-
-    socket.on('SendMove', function (data) {
-        console.log("data sending: " +data.username);
-        io.sockets.emit('SendMove' , data);
-        console.log("sent");
-    } );
-
-
-
-    function doIt(){
-        var MongoClient = require('mongodb').MongoClient;
-        var url = "mongodb://localhost:27017/loginapp";
-
-        MongoClient.connect(url, function(err, db) {
-            console.log("heheheheheheheeheheh :" );
+    // Niaz Hussain :when user is typing ,show typing message to all connected user
+    socket.on('typing', function (data){
+        socket.broadcast.emit('typing', data);
+    });
+    // Niaz Hussain :
+    socket.on('not typing', function (data){
+        socket.broadcast.emit('not typing',data);
+    });
+    // Niaz Hussain :
+    socket.on('thinking', function (data){
+        socket.broadcast.emit('thinking',data);
+    });
+    //Handle Invite requests
+    socket.on('inviteSend', function(data){
+        console.log('invite for : '+data.id+ ' from : '+socket.id);
+        //TO active table - id socket - receiver ID
+        //FROM token decode - from ID
+        sendInvite(data);
+    });
+    //Handle invite accept
+    socket.on('inviteAccepted', function(data){
+        //TO active table - id socket - receiver ID
+        //FROM token decode - from ID
+        inviteAccepted(data);
+    });
+    socket.on('inviteRejected', function(data){
+        //TO active table - id socket - receiver ID
+        //FROM token decode - from ID
+        inviteRejected(data);
+    });
+    //Play game
+    socket.on('playgame',function (data) {
+        //data contains both users ids as  acceptedToId, acceptedById
+        Active.getUserByID(data.acceptedToId, function(err, acceptedToUser) {
             if (err) throw err;
-            db.collection("actives").find({}).toArray(function(err, result) {
+            Active.getUserByID(data.acceptedById, function(err, acceptedByUser) {
                 if (err) throw err;
+                //console.log(JSON.stringify(acceptedByUser, undefined , 4));
+                /* setTimeout(function playGame(acceptedByUser,acceptedToUser,data){
+                     console.log("play timeout");
+                     io.to(acceptedByUser.socketid).to(acceptedToUser.socketid).emit('playgame', data);
+                     }, 500);*/
+                while(acceptedByUser.socketid == "undefined" && acceptedToUser.socketid == "undefined")
+                {
+                }
+                data.acceptedByUserName=acceptedByUser.username;
+                data.acceptedToUserName=acceptedToUser.username;
+                io.to(acceptedByUser.socketid).to(acceptedToUser.socketid).emit('playgame', data);
 
-                db.close();
-                socket.emit('userLogout',{
-                    activeUlist:result
-
-                });
             });
         });
-    }
+        //console.log(" PlayGame "+JSON.stringify(acceptedByUser, undefined , 4));
+    });
+    socket.on('disconnect', function () {
+        socketserver.handleDisconnect(socket.handshake.query.token, socket.id, function(err){
+            if(err) throw err;
+
+        });
+        setTimeout(getUser, 600);
+        console.log('disconnected');
+        // console.log('broadcast is calling DISCONNECT');
+        //setTimeout(socketserver.broadcastActiveUsers, 1800);
+    });
+///////////////////////// multiplayer gameobject /////////////
+    socket.on('SendMove', function (data) {
+        console.log("data sending: " + data.username);
+        io.sockets.emit('SendMove', data);
+        console.log("sent");
+    });
 });
 
 //********************************************************//

@@ -68,8 +68,54 @@ var TurnStatus = "P1";
 
 function checkboard(HLineNo , VLineNo , isHorizontal , isVertical)
 {
+  var bComTurn = true;
+  var ComputerHorizontalLineNumber;
+  var ComputerVerticalLineNumber;
 var HorizontalCompeletedLines;
 var VerticalCompeletedLines;
+
+while(bComTurn)
+{
+    var res =false;
+    var randonNumberX = Math.floor((Math.random() * 500) + 0);
+    var randonNumberY = Math.floor((Math.random() * 500) + 0);
+    ComputerHorizontalLineNumber = Math.floor(randonNumberX / 100);
+    ComputerVerticalLineNumber = Math.floor(randonNumberY / 100);
+    var XVal = randonNumberX % 100;
+    var YVal = randonNumberY % 100;
+    if( (XVal > 20 && XVal < 100)  && (YVal > 0  && YVal < 20) ){
+        if(IsHorizontal(randonNumberX ,randonNumberY))
+            {
+                bComTurn = false;
+            }
+    }
+    else if( (XVal > 0 && XVal < 20)  && (YVal > 20  && YVal < 100) )
+    {
+        if(IsVertical(randonNumberX, randonNumberY))
+            {
+                bComTurn = false;
+            }
+    }
+}
+// IF COMPUTER GETS EXTRA TURN.
+if(TurnStatus == "COM")
+    setTimeout(ComputerTurn, 800);
+else
+    TurnStatus = "P1";
+
+//update turn message after Computer's turn.
+UpdateTurnStatus();
+
+var Player1stats = document.getElementById( "player1_stats");
+Player1stats.innerHTML = "<span class =' text-center label label-success'>" +
+    Player1Score +
+    "</span>";
+
+var Player2stats = document.getElementById( "player2_stats");
+Player2stats.innerHTML = "<span class =' text-center label label-success'>" +
+    Player2Score +
+    "</span>" ;
+
 if(HorizontalCompeletedLines + VerticalCompeletedLines = 3){
   //draw if 3 lines are made
 }
