@@ -25,6 +25,7 @@ var db = mongoose.connection;
 
 var socketserver = require('./socketserver/socketserver');
 var Active = require('./models/active');
+var Game = require('./models/game');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -97,8 +98,14 @@ var server = app.listen(app.get('port'), function(){
     console.log('Server started on port '+app.get('port'));
 });
 
+//Clear Active
 Active.remove({},()=>{
     console.log('active cleared');
+});
+
+//Clear Game Collection
+Game.clearTable(()=>{
+  console.log('Game Collection cleared on server start');
 });
 
 //************************************************************//
@@ -245,6 +252,18 @@ io.on('connection', (socket)=>{
     });
     //Play game
     socket.on('playgame',function (data) {
+
+        game = new Game ({
+          acceptedById : data.acceptedById ,
+          acceptedToId : data.acceptedToId
+        });
+
+        Game.createGame(game, (err) => {
+          if (err) throw err;
+          console.log('game created'+JSON.stringify(game,undefined, 4));
+
+        });
+
         //data contains both users ids as  acceptedToId, acceptedById
         Active.getUserByID(data.acceptedToId, function(err, acceptedToUser) {
             if (err) throw err;
