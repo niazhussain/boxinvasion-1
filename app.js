@@ -207,7 +207,15 @@ io.on('connection', (socket)=>{
         
     // chat data by Niaz Hussain
         socket.on('chat', function (data) {
-          console.log("client id: "+ socket.id);
+          /*console.log("client id: "+ socket.id);
+            Active.getUserByID("5a285d2eed8e730d4c46b83b", function(err, acceptedToUser) {
+                if (err) throw err;
+                Active.getUserByID("5a41128037a8042a8cf1fc72", function(err, acceptedByUser) {
+                    if (err) throw err;
+                    //console.log(JSON.stringify(acceptedByUser, undefined , 4));
+                   io.to(acceptedByUser.socketid).to(acceptedToUser.socketid).emit('chat', data);
+                });
+            });*/
           io.sockets.emit('chat', data);
         });
 
@@ -249,8 +257,18 @@ io.on('connection', (socket)=>{
               Active.getUserByID(data.acceptedById, function(err, acceptedByUser) {
                 if (err) throw err;
                 //console.log(JSON.stringify(acceptedByUser, undefined , 4));
+                 /* setTimeout(function playGame(acceptedByUser,acceptedToUser,data){
+                      console.log("play timeout");
+                      io.to(acceptedByUser.socketid).to(acceptedToUser.socketid).emit('playgame', data);
+                      }, 500);*/
+                  while(acceptedByUser.socketid == "undefined" && acceptedToUser.socketid == "undefined")
+                  {
+                  }
+                  data.acceptedByUserName=acceptedByUser.username;
+                  data.acceptedToUserName=acceptedToUser.username;
                  io.to(acceptedByUser.socketid).to(acceptedToUser.socketid).emit('playgame', data);
-            });
+
+                });
         });
         //console.log(" PlayGame "+JSON.stringify(acceptedByUser, undefined , 4));
       });
