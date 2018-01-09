@@ -194,6 +194,15 @@ socket.join(socket.id);
 
       
   });
+
+    socket.on('SendMove', function (data) {
+        console.log("data sending: " +data.username);
+        io.sockets.emit('SendMove' , data);
+        console.log("sent");
+    } );
+
+
+
     function doIt(){
         var MongoClient = require('mongodb').MongoClient;
         var url = "mongodb://localhost:27017/loginapp";

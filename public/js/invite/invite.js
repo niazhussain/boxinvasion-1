@@ -6,7 +6,8 @@
 btn = document.getElementById('send');
 messageArea = document.getElementById('messageArea');
 feedback = document.getElementById('typingMessage');*/
-var thisUser;
+var thisUser = document.getElementById("user").value;
+console.log("user name is: " +thisUser);
 //show live user
 socket.on('newuser', function(data){
     var ele=document.getElementById("onlineuser");
@@ -17,7 +18,7 @@ socket.on('newuser', function(data){
     for(i in data.activeUlist) {
         console.log("User id " + data.activeUlist[i]._id);
         console.log(JSON.stringify(data.activeUlist, undefined, 4));
-        if (data.activeUlist[i].username !== thisUser) {
+        if (data.activeUlist[i].username != thisUser) {
             var element = document.getElementById('onlineuser');
             //  if(( $( "#onlineuser" ).length ))
             // element.innerHTML+='<div></div><span class="input-group-addon small" style="width: inherit" id="basic-addon1">'+data.activeUlist[i].username+'</span><span class="input-group-btn "><button socketid="'+data.activeUlist[i].socketid+'"class="btn btn-primary"  id="'+data.activeUlist[i].userid+'">Send</button></span></div>';

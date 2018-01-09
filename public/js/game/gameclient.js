@@ -1,4 +1,15 @@
+
+socket.on('SendMove', function(data) {
+    console.log("data received: " + data.Xvalue);
+    console.log("data received: " + data.Yvalue);
+    OtherPlayerTurn(data);
+});
+
+
+
+
 var canvas = document.querySelector('canvas');
+var CurrentUserName = document.getElementById("user").value;
 //Canvas Dimension
 var cnvW = 500+20;
 var cnvH = 500+20;
@@ -30,7 +41,16 @@ for (var i = dotX; i < numberOfDots; i++) {
     }
 }
 
-
+var GamePlay = "One Player"; // one player or Two player
+var player1Name = "Umar";
+var player2Name = "test" ;
+var TurnStatus = player1Name;
+var TurnStatusForMultiplayer = true;
+var Player1 = player1Name;
+var Player2 = player2Name;
+//var ToggleTurnState = true;
+var FirstTime = true;
+var ValidMoveBool = false;
 
 
 $( document ).ready(function() {
@@ -44,7 +64,18 @@ $( document ).ready(function() {
 
     $( "#Play" ).click(function() {
         var canvas = document.getElementById("canvas");
-        canvas.addEventListener('click', getPosition , true);
+        if(GamePlay == "One Player")
+        {
+            canvas.addEventListener('click', getPositionForComputer , true);
+            document.getElementById("P1_name").innerHTML = CurrentUserName + " Score";
+            document.getElementById("P2_name").innerHTML = "Computer Score";
+        }
+        if(GamePlay == "Two Player")
+        {
+            canvas.addEventListener('click', getPositionForMultiPlayer , true);
+            document.getElementById("P1_name").innerHTML = player1Name + " Score";
+            document.getElementById("P2_name").innerHTML = player2Name + " Score";
+        }
 
         document.getElementById("game_msg").innerHTML = "<h3><span> Make a first move </span></h3>";
 
@@ -60,16 +91,74 @@ $( document ).ready(function() {
 });
 
 
+function getPositionForMultiPlayer(event)
+{
+
+    document.getElementById("game_msg").innerHTML = "";
+    x = event.offsetX || event.layerX ;
+    y = event.offsetY || event.layerY ;
+
+    //alert(TurnStatus);
+    if(TurnStatus != CurrentUserName && FirstTime ==true) {
+        return;
+    }
+
+    if(TurnStatus != CurrentUserName && FirstTime == false)
+    {
+        return;
+    }
+    var temp1 = "";
+    var temp2 = "";
+    temp1 = IsHorizontal(x, y);
+    //alert(res + "wait");
+    temp2 = IsVertical(x, y);
+    //alert(res+"wait again");
+
+    //update turn message after Player's turn.
+   // alert(TurnStatus);
+    UpdateTurnStatus();
+    var Player1stats = document.getElementById( "player1_stats");
+    Player1stats.innerHTML = "<span class ='text-center label label-success'>" +
+        Player1Score +
+        "</span>" ;
+
+    var Player2stats = document.getElementById( "player2_stats");
+    Player2stats.innerHTML = "<span class =' text-center label label-success'>" +
+        Player2Score +
+        "</span>" ;
+
+    //alert(ValidMoveBool);
+    if(temp1 == "valid" || temp2 == "valid")
+    {
+        //alert("aya");
+        socket.emit('SendMove', {
+            username : CurrentUserName,
+            Xvalue : x,
+            Yvalue : y,
+            Updateturnstatus : TurnStatusForMultiplayer
+
+        });
+
+
+    }
+    //alert(ValidMoveBool);
+    FirstTime = false;
 
 
 
-var player1Name = "P1";
-var player2Name = "n/a" ;
-var TurnStatus = "P1";
+
+    //ToggleTurnState = false;
+    //TurnStatus = data.username;
+    //UpdateTurnStatus();
+
+    //TurnCount++;
+}
 
 
 
-function getPosition(event)
+
+
+function getPositionForComputer(event)
 {
 
     document.getElementById("game_msg").innerHTML = "";
@@ -85,7 +174,7 @@ function getPosition(event)
 
     player2Name = "Com";
     //alert(TurnStatus + " turn");
-    if(TurnStatus != "P1")
+    if(TurnStatus != CurrentUserName)
     {
             setTimeout(ComputerTurn, 1000);
     }
@@ -104,6 +193,50 @@ function getPosition(event)
 
 
 }
+
+function OtherPlayerTurn(data){
+
+    //console.log("called");
+    //alert("update turnstatus: "+data.Updateturnstatus);
+    //if(data.UpdateTurnStatus)
+    //{
+        if(data.Updateturnstatus == true){
+
+            //TurnCount++;
+            if(data.username ==  player1Name ) {
+                TurnStatus = Player2;
+            }
+            else {
+                TurnStatus = Player1;
+            }
+
+        }
+
+   // }
+
+    UpdateTurnStatus();
+
+    IsHorizontal(data.Xvalue ,data.Yvalue);
+    IsVertical(data.Xvalue ,data.Yvalue);
+
+    TurnStatusForMultiplayer =true;
+    //TurnStatus = CurrentUserName;
+
+
+    var Player1stats = document.getElementById( "player1_stats");
+    Player1stats.innerHTML = "<span class =' text-center label label-success'>" +
+        Player1Score +
+        "</span>";
+
+    var Player2stats = document.getElementById( "player2_stats");
+    Player2stats.innerHTML = "<span class =' text-center label label-success'>" +
+        Player2Score +
+        "</span>" ;
+
+    //ToggleTurnState = true;
+
+}
+
 function ComputerTurn(){
     value =true;
 
@@ -137,7 +270,7 @@ function ComputerTurn(){
     if(TurnStatus == "COM")
         setTimeout(ComputerTurn, 2000);
     else
-        TurnStatus = "P1";
+        TurnStatus = CurrentUserName;
 
     //update turn message after Computer's turn.
     UpdateTurnStatus();
@@ -157,6 +290,7 @@ function ComputerTurn(){
 
 function UpdateTurnStatus()
 {
+    //alert(TurnStatus);
     var PlayerTurnStatus = document.getElementById("PlayerTurn");
     PlayerTurnStatus.innerHTML = "<h3>" +"<span class ='label label-success'>" +
         TurnStatus +
@@ -200,27 +334,36 @@ function IsHorizontal(x ,y)
     HorizontalLineNumber = Math.floor(x / 100);
     VerticalLineNumber = Math.floor(y / 100);
 
-   // alert(HorizontalLineNumber + " , " + VerticalLineNumber)
+    //alert(HorizontalLineNumber + " , " + VerticalLineNumber)
     var XVal = x % 100;
     var YVal = y % 100;
     if( (XVal > 20 && XVal < 100)  && (YVal > 0  && YVal < 20) )
     {
-
+        //ValidMoveBool = true;
         // CHECK FOR ALREADY DRAWN LINE
         var result = validateMove(HorizontalLineNumber , VerticalLineNumber ,true ,false);
         if(!result){
             return false;
         }
-
         if(CheckBoxCompleted(HorizontalLineNumber , VerticalLineNumber , true  ,false))
         {
             if(count%2 == 0)
             {
-                TurnStatus = "P1";
+                TurnStatus = Player1;
+                //TurnStatusForMultiplayer = false;
             }
-            else {
-                TurnStatus = "COM";
+            else
+            {
+                if(GamePlay == "One Player")
+                    TurnStatus = "COM";
+                else if(GamePlay == "Two Player")
+                {
+                    TurnStatus = Player2;
+                   // TurnStatusForMultiplayer = false;
+                }
+
             }
+            TurnStatusForMultiplayer = false;
 
         }
 
@@ -231,11 +374,19 @@ function IsHorizontal(x ,y)
 
             if(count%2 == 0)
             {
-                TurnStatus = "P1";
+                TurnStatus = Player1;
             }
-            else {
-                TurnStatus = "COM";
+            else
+            {
+
+                if(GamePlay == "One Player")
+                    TurnStatus = "COM";
+                else if(GamePlay == "Two Player")
+                    TurnStatus = Player2;
+                //alert(TurnStatus);
+
             }
+            TurnStatusForMultiplayer = true;
         }
 
         var hLineX = 20;
@@ -245,9 +396,14 @@ function IsHorizontal(x ,y)
 
         PopulateArray(HorizontalLineNumber , VerticalLineNumber ,true); //true is for Horizontal
         //drawing the Line
+
         c.fillStyle = '#1d5a67';//'rgba(250, 144, 33,0.7)';
         c.fillRect((HorizontalLineNumber*cellWidth)+hLineX,(VerticalLineNumber*cellWidth)+hLineY, hLineW, hLineH);
+
+
+        return "valid";
     }
+    //alert("khtam");
     return true;
 }
 
@@ -273,11 +429,21 @@ function IsVertical(x ,y)
         {
             if(count%2 == 0)
             {
-                TurnStatus = "P1";
+                TurnStatus = Player1;
+                //TurnStatusForMultiplayer = false;
             }
-            else {
-                TurnStatus = "COM";
+            else
+            {
+                if(GamePlay == "One Player")
+                    TurnStatus = "COM";
+                else if(GamePlay == "Two Player")
+                {
+                    TurnStatus = Player2;
+                    //TurnStatusForMultiplayer = false;
+                }
+
             }
+            TurnStatusForMultiplayer = false;
         }
 
 
@@ -288,11 +454,17 @@ function IsVertical(x ,y)
 
             if(count%2 == 0)
             {
-                TurnStatus = "P1";
+                TurnStatus = Player1;
             }
-            else {
-                TurnStatus = "COM";
+            else
+            {
+                if(GamePlay == "One Player")
+                    TurnStatus = "COM";
+                else if(GamePlay == "Two Player")
+                    TurnStatus = Player2;
+
             }
+            TurnStatusForMultiplayer = true;
         }
 
         var vLineX = 0;
@@ -304,7 +476,10 @@ function IsVertical(x ,y)
         //drawing the Line
         c.fillStyle = '#1d5a67';//'rgba(250, 144, 33,0.7)';
         c.fillRect((HorizontalLineNumber*cellWidth)+vLineX,(VerticalLineNumber*cellWidth)+vLineY, vLineW, vLineH);
+        return "valid";
     }
+
+
     return true;
 }
 
@@ -325,7 +500,7 @@ function PopulateArray(FirstIndex , SecondIndex , isHorizontal)
 
 function PopulateBoxCapturedArray(FirstIndex , SecondIndex )
 {
-    //alert(FirstIndex +" , " + SecondIndex);
+    //alert( " box completed " + TurnStatus);
     BoxCapturedArray[FirstIndex][SecondIndex] = TurnStatus;
 
 }
@@ -338,32 +513,62 @@ function CalculateScore()
     {
         for(var j=0; j<BoxCapturedArray.length; j++)
         {
-            if(BoxCapturedArray[i][j] == "P1")
+            if(BoxCapturedArray[i][j] == Player1)
             {
                 score1++;
             }
-            else if(BoxCapturedArray[i][j] == "COM")
+            else
             {
-                score2++;
+                if(GamePlay == "One Player")
+                {
+                    if(BoxCapturedArray[i][j] == "COM")
+                    {
+                        score2++;
+                    }
+                }
+                else if(GamePlay == "Two Player")
+                {
+                    if(BoxCapturedArray[i][j] == Player2)
+                    {
+                        score2++;
+                    }
+                }
             }
+
         }
     }
-    if(score1+score2 == 25)
+
+    Player1Score = score1;
+    Player2Score = score2;
+
+    if(Player1Score+Player2Score == 25)
     {
-        if(score1 > score2)
+        if(Player1Score > Player2Score)
         {
+
+            /*if(GamePlay == "Two Player")
+            {
+                socket.emit('WinState' , function(data){
+                    winstate : false;
+                });
+            }*/
             //alert(document.getElementById("user").value);
             WinningUpdate(document.getElementById("user").value,true);
             TurnStatus = "";
+
         }
         else
         {
             WinningUpdate(document.getElementById("user").value,false);
             TurnStatus = "";
+            /*if(GamePlay == "Two Player")
+            {
+                socket.emit('WinState' , function(data){
+                    winstate : true;
+                });
+            }*/
         }
     }
-    Player1Score = score1;
-    Player2Score = score2;
    // alert(Player1Score);
 }
 // HTMLCanvasElement.prototype.getPosition = getPosition;
@@ -377,7 +582,7 @@ function WinningUpdate(WinnerName, WinningStatus) {
         $('#modal_title').html( "You Win !! Congratulations");
         $('.Celebration').fireworks({
         sound: true, // sound effect
-        opacity: 0.4,
+        opacity: 0.75,
         width: '20%',
         height: '30%'
     });
