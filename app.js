@@ -261,7 +261,7 @@ io.on('connection', (socket)=>{
                 data.acceptedByUserName=acceptedByUser.username;
                 data.acceptedToUserName=acceptedToUser.username;
                 io.to(acceptedByUser.socketid).to(acceptedToUser.socketid).emit('playgame', data);
-
+                console.log("going");
             });
         });
         //console.log(" PlayGame "+JSON.stringify(acceptedByUser, undefined , 4));

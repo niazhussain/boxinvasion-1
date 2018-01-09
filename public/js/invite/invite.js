@@ -180,10 +180,10 @@ $( document ).ready(function() {
                     document.getElementById(data.rejectedById).innerText="Challenge";
                     document.getElementById(data.rejectedById).disabled=false;
                 }
-                socket.emit('playgame', {
+                /*socket.emit('playgame', {
                     msg:"start to playgame",
 
-                });
+                });*/
             }
         });
 
