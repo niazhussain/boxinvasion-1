@@ -103,20 +103,14 @@ Active.remove({},()=>{
 
 //************************************************************//
 function getUser(){
-    var MongoClient = require('mongodb').MongoClient;
-    var url = "mongodb://localhost:27017/loginapp";
 
-    MongoClient.connect(url, function(err, db) {
-        console.log("heheheheheheheeheheh :" );
+    Active.find({}, function(err, result) {
+        console.log(" dataaaa "+JSON.stringify(result, undefined , 4));
         if (err) throw err;
-        db.collection("actives").find({}).toArray(function(err, result) {
-            if (err) throw err;
 
-            db.close();
-            io.sockets.emit('newuser',{
-                activeUlist:result
+        io.sockets.emit('newuser',{
+            activeUlist:result
 
-            });
         });
     });
 }
