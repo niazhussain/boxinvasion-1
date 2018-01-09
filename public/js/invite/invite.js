@@ -112,7 +112,7 @@ $( document ).ready(function() {
             if(confirm){
                 if(data.username===thisUser)
                 {
-                    document.getElementById(data.requestFromId).innerText="Leave Game";
+                    document.getElementById(data.requestFromId).innerText="Already Playing";
                     document.getElementById(data.requestFromId).disabled=false;
                 }
                 socket.emit('inviteAccepted', {
@@ -148,7 +148,7 @@ $( document ).ready(function() {
             if(confirm){
                 if(data.username===thisUser)
                 {
-                    document.getElementById(data.acceptedById).innerText="Leave Game";
+                    document.getElementById(data.acceptedById).innerText="Already Playing";
                     document.getElementById(data.acceptedById).disabled=false;
                 }
                 socket.emit('playgame', {
